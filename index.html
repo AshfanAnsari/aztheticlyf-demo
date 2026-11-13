@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aztheticlyf — Aesthetic Gift Studio, Chennai | Custom Gift Hampers</title>
+<meta name="description" content="Aztheticlyf is an aesthetic gift studio in Chennai. Custom gift hampers, Korean stationery hampers, Bath & Bubbles and Saree hampers — ordered on WhatsApp, with same-day delivery in Chennai.">
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{
+  --ground:#FBFAFD;
+  --ground-2:#F3EFF9;
+  --ground-3:#EAE3F5;
+  --ink:#2E1A38;
+  --ink-soft:#5B4A66;
+  --accent:#7C4DA0;
+  --accent-deep:#5E3580;
+  --purple:#7C4DA0;
+  --pink:#C94F7C;
+  --lavender:#9B7ED0;
+  --gold:#C9A24B;
+  --dark:#1E1428;
+  --radius:999px;
+  --max:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{font-family:'Jost',sans-serif;background:var(--ground);color:var(--ink);font-size:17px;line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,.display{font-family:'Italiana',serif;font-weight:400;line-height:1.04;letter-spacing:.01em}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+::selection{background:var(--accent);color:#fff}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:var(--ground)}
+.header-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:18px;padding-bottom:18px}
+.wordmark{font-family:'Italiana',serif;font-size:30px;text-decoration:none;letter-spacing:.04em}
+.wordmark span{color:var(--accent)}
+nav.main{display:flex;gap:28px}
+nav.main a{text-decoration:none;font-size:15px;font-weight:400;color:var(--ink-soft)}
+nav.main a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;text-decoration:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:16px;font-weight:500;padding:14px 28px;border-radius:var(--radius);transition:background .25s,transform .15s}
+.btn:hover{background:var(--accent-deep)}
+.btn:active{transform:scale(.97)}
+.btn.wa{background:#1FA855}
+.btn.wa:hover{background:#178A44}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn.small{padding:10px 20px;font-size:15px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+
+/* Hero */
+.hero{padding:56px 0 96px;background:var(--ground)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(52px,7.2vw,96px)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:20px;color:var(--ink-soft);max-width:34em;margin:26px 0 34px;font-weight:300}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.sameday{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:var(--radius);padding:9px 18px;font-size:14.5px;font-weight:500;margin-bottom:28px}
+.sameday i{width:9px;height:9px;border-radius:50%;background:#7BE495;display:inline-block}
+.hero-meta{display:flex;gap:34px;margin-top:40px;flex-wrap:wrap}
+.hero-meta div strong{display:block;font-family:'Italiana',serif;font-size:26px;font-weight:400}
+.hero-meta div span{font-size:14.5px;color:var(--ink-soft)}
+.hero-img{position:relative}
+.hero-img img{width:100%;height:560px;object-fit:cover;border-radius:200px 200px 12px 12px}
+.hero-tag{position:absolute;left:-14px;bottom:34px;background:#fff;padding:16px 20px;border-radius:12px;max-width:250px}
+.hero-tag strong{font-family:'Italiana',serif;font-weight:400;font-size:21px;display:block;line-height:1.15}
+.hero-tag span{font-size:14px;color:var(--ink-soft)}
+
+/* Section base */
+section{padding:104px 0}
+.sec-head{max-width:720px;margin-bottom:52px}
+.sec-head h2{font-size:clamp(40px,4.6vw,62px);margin-bottom:16px}
+.sec-head p{font-size:18.5px;color:var(--ink-soft)}
+
+/* Builder */
+.builder-sec{background:var(--ground-2)}
+.builder-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:start}
+.step-block{margin-bottom:40px}
+.step-block h3{font-size:30px;margin-bottom:6px}
+.step-block p.hint{color:var(--ink-soft);font-size:15.5px;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-family:'Jost',sans-serif;font-size:16px;font-weight:400;background:#fff;color:var(--ink);border:2px solid var(--ground-3);border-radius:var(--radius);padding:11px 22px;cursor:pointer;transition:border-color .2s,background .2s,transform .12s}
+.chip:hover{border-color:var(--accent)}
+.chip:active{transform:scale(.96)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip.theme-purple[aria-pressed="true"]{background:var(--purple);border-color:var(--purple)}
+.chip.theme-pink[aria-pressed="true"]{background:var(--pink);border-color:var(--pink)}
+.chip.theme-lavender[aria-pressed="true"]{background:var(--lavender);border-color:var(--lavender)}
+.chip .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:8px;vertical-align:baseline}
+.summary{position:sticky;top:96px;background:#fff;border-radius:16px;padding:28px}
+.summary h3{font-size:28px;margin-bottom:4px}
+.summary .sub{font-size:14.5px;color:var(--ink-soft);margin-bottom:20px}
+.box-visual{height:150px;border-radius:12px;background:var(--ground-3);position:relative;overflow:hidden;margin-bottom:22px;transition:background .5s}
+.box-visual .ribbon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Italiana',serif;font-size:26px;color:#fff;text-align:center;padding:0 20px;line-height:1.2}
+.box-visual .fill{position:absolute;left:0;right:0;bottom:0;height:0%;transition:height .6s cubic-bezier(.22,1,.36,1)}
+.sum-row{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--ground-2);font-size:15.5px}
+.sum-row dt{color:var(--ink-soft)}
+.sum-row dd{font-weight:500;text-align:right}
+.sum-row dd.empty{color:#B9A8C9;font-weight:300}
+.summary .btn{width:100%;justify-content:center;margin-top:22px}
+.summary .note{font-size:13.5px;color:var(--ink-soft);text-align:center;margin-top:12px}
+.progress-line{height:6px;background:var(--ground-2);border-radius:99px;overflow:hidden;margin-bottom:20px}
+.progress-line i{display:block;height:100%;width:0;background:var(--accent);transition:width .5s cubic-bezier(.22,1,.36,1)}
+
+/* Catalogue */
+.cards{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+.card{background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;height:230px;object-fit:cover}
+.card .body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:29px;line-height:1.1}
+.card p{color:var(--ink-soft);font-size:15.5px}
+.card ul{list-style:none;font-size:15px;color:var(--ink-soft)}
+.card ul li{padding:3px 0 3px 18px;position:relative}
+.card ul li::before{content:"";position:absolute;left:0;top:12px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.card .foot{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.price-note{font-size:14px;color:var(--ink-soft);font-weight:400}
+.card.c-7{grid-column:span 7}.card.c-5{grid-column:span 5}
+.card.c-4{grid-column:span 4}.card.c-8{grid-column:span 8}
+.card.tint-purple{background:#F0E9F8}.card.tint-pink{background:#FAEDF2}.card.tint-lav{background:#EFEBFA}
+.card.tint-purple .body,.card.tint-pink .body,.card.tint-lav .body{background:transparent}
+
+/* Same day */
+.sameday-sec{background:var(--ink);color:#fff}
+.sameday-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.sameday-sec h2{font-size:clamp(40px,4.6vw,62px);margin-bottom:18px}
+.sameday-sec p{color:#D9CDE4;font-size:18.5px;max-width:32em}
+.sameday-sec img{width:100%;height:420px;object-fit:cover;border-radius:16px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px}
+.fact{background:#3A2549;padding:20px;border-radius:12px}
+.fact strong{font-family:'Italiana',serif;font-size:25px;font-weight:400;display:block;line-height:1.15}
+.fact span{font-size:14.5px;color:#CBBEDB}
+
+/* Wholesale */
+.wholesale-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.wholesale-grid img{width:100%;height:460px;object-fit:cover;border-radius:16px}
+.checklist{list-style:none;margin:22px 0 30px}
+.checklist li{padding:9px 0 9px 30px;position:relative;font-size:17.5px}
+.checklist li::before{content:"";position:absolute;left:0;top:15px;width:14px;height:8px;border-left:3px solid var(--accent);border-bottom:3px solid var(--accent);transform:rotate(-45deg)}
+
+/* Tara */
+.tara-sec{background:var(--dark);color:#F3EDE2}
+.tara-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.tara-sec h2{font-size:clamp(40px,4.6vw,60px);color:#fff}
+.tara-sec h2 em{font-style:normal;color:var(--gold)}
+.tara-sec p{color:#CFC4B8;font-size:18.5px;margin:16px 0 28px;max-width:32em}
+.tara-specs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px}
+.tara-specs span{border:1.5px solid #57496B;border-radius:var(--radius);padding:8px 18px;font-size:14.5px;color:#E7DFD2}
+.tara-sec img{width:100%;height:440px;object-fit:cover;border-radius:16px}
+.btn.gold{background:var(--gold);color:#241A05}
+.btn.gold:hover{background:#B28F3A}
+
+/* Footer */
+footer{background:var(--ground-2);padding:80px 0 40px}
+.foot-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:44px;margin-bottom:56px}
+footer h3{font-size:26px;margin-bottom:14px}
+footer a{color:var(--ink-soft);text-decoration:none;display:block;padding:4px 0;font-size:16px}
+footer a:hover{color:var(--ink)}
+footer p{color:var(--ink-soft);font-size:16px;max-width:30em}
+.foot-name{font-family:'Italiana',serif;font-size:clamp(56px,10vw,130px);line-height:1;text-align:center;color:var(--ink);opacity:.94}
+.demo-note{text-align:center;font-size:13.5px;color:var(--ink-soft);margin-top:26px}
+.credits{text-align:center;font-size:12.5px;color:#9A8AA8;margin-top:8px;max-width:800px;margin-left:auto;margin-right:auto}
+
+.reveal{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  .js .reveal{opacity:0}
+}
+@media(max-width:900px){
+  nav.main{display:none}
+  .hero-grid,.builder-grid,.sameday-grid,.wholesale-grid,.tara-grid,.foot-grid{grid-template-columns:1fr}
+  .hero{padding:32px 0 64px}
+  .hero-img img{height:380px}
+  .summary{position:static}
+  section{padding:72px 0}
+  .card.c-7,.card.c-5,.card.c-4,.card.c-8{grid-column:span 12}
+  .facts{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  body{font-size:16px}
+  .wordmark{font-size:23px}
+  .header-in{gap:8px}
+  .header-in .btn.small{padding:9px 14px;font-size:13.5px;white-space:nowrap}
+  .hero h1{font-size:54px}
+  .facts{grid-template-columns:1fr}
+  .hero-meta{gap:20px}
+  .btn{width:100%;justify-content:center}
+  .hero-ctas .btn{width:100%}
+  .card .foot{flex-direction:column;align-items:stretch}
+  .card .foot .btn{justify-content:center}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap header-in">
+    <a class="wordmark" href="#top">Azthetic<span>lyf</span></a>
+    <nav class="main" aria-label="Main">
+      <a href="#builder">Build a Hamper</a>
+      <a href="#hampers">Ready-Made</a>
+      <a href="#sameday">Same-Day Chennai</a>
+      <a href="#wholesale">Wholesale</a>
+      <a href="#tara">Tara Luxe</a>
+    </nav>
+    <a class="btn small wa" href="https://wa.me/917871501939?text=Hi%20Aztheticlyf!%20I%27d%20like%20to%20order%20a%20gift%20hamper." target="_blank" rel="noopener">Order on WhatsApp</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="sameday reveal"><i></i> Same-Day Delivery in Chennai</p>
+        <h1 class="reveal">A gift hamper, made exactly for them.</h1>
+        <p class="lede reveal">Aztheticlyf is an aesthetic gift studio in Chennai. Choose an occasion, a colour and a hamper — we pack it with Korean stationery, self-care favourites and little things they will actually keep, and send it with your handwritten note.</p>
+        <div class="hero-ctas reveal">
+          <a class="btn" href="#builder">Build Your Own Hamper</a>
+          <a class="btn ghost" href="https://wa.me/917871501939?text=Hi%20Aztheticlyf!%20I%27d%20like%20to%20order%20a%20gift%20hamper." target="_blank" rel="noopener">WhatsApp Us</a>
+        </div>
+        <div class="hero-meta reveal">
+          <div><strong>10,000+</strong><span>happy customers, in her words</span></div>
+          <div><strong>Chennai</strong><span>same-day, in as little as 4 hours</span></div>
+          <div><strong>Worldwide</strong><span>pan-India &amp; international shipping</span></div>
+        </div>
+      </div>
+      <div class="hero-img reveal">
+        <img id="heroImg" src="assets/hero.jpg" alt="A gift hamper being packed with stationery and small gifts" width="900" height="1120">
+        <div class="hero-tag"><strong>Packed by hand, in Chennai</strong><span>Every hamper is customised and finished with a handwritten note.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILDER -->
+  <section class="builder-sec" id="builder">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Build your own hamper</h2>
+        <p>Four choices and it is yours. Your selection opens in WhatsApp as one ready-to-send order — no forms, no checkout queue.</p>
+      </div>
+      <div class="builder-grid">
+        <div>
+          <div class="step-block reveal">
+            <h3>Who is it for, and why?</h3>
+            <p class="hint">Pick the occasion.</p>
+            <div class="chips" role="group" aria-label="Occasion" id="occasionChips"></div>
+          </div>
+          <div class="step-block reveal">
+            <h3>Pick a colour theme</h3>
+            <p class="hint">Her signature colour hampers — the whole box follows the theme.</p>
+            <div class="chips" role="group" aria-label="Colour theme" id="themeChips"></div>
+          </div>
+          <div class="step-block reveal">
+            <h3>Choose the hamper</h3>
+            <p class="hint">The base we build around.</p>
+            <div class="chips" role="group" aria-label="Hamper type" id="baseChips"></div>
+          </div>
+          <div class="step-block reveal">
+            <h3>Add the finishing touches</h3>
+            <p class="hint">Optional — pick as many as you like.</p>
+            <div class="chips" role="group" aria-label="Add-ons" id="addonChips"></div>
+          </div>
+        </div>
+        <aside class="summary reveal" aria-live="polite" aria-label="Your hamper summary">
+          <h3>Your hamper</h3>
+          <p class="sub">Watch it come together.</p>
+          <div class="progress-line" aria-hidden="true"><i id="progressFill"></i></div>
+          <div class="box-visual" id="boxVisual">
+            <div class="fill" id="boxFill"></div>
+            <div class="ribbon" id="boxLabel">Your box is waiting</div>
+          </div>
+          <dl>
+            <div class="sum-row"><dt>Occasion</dt><dd id="sumOccasion" class="empty">Not chosen yet</dd></div>
+            <div class="sum-row"><dt>Colour theme</dt><dd id="sumTheme" class="empty">Not chosen yet</dd></div>
+            <div class="sum-row"><dt>Hamper</dt><dd id="sumBase" class="empty">Not chosen yet</dd></div>
+            <div class="sum-row"><dt>Add-ons</dt><dd id="sumAddons" class="empty">None yet</dd></div>
+          </dl>
+          <a class="btn wa" id="orderBtn" href="#" target="_blank" rel="noopener" aria-disabled="true">Order This Hamper on WhatsApp</a>
+          <p class="note" id="orderNote">Choose an occasion, a colour and a hamper to continue. Price is confirmed on WhatsApp.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- READY-MADE -->
+  <section id="hampers">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Ready-made hampers</h2>
+        <p>The hampers her customers order again and again. Tap one and it opens in WhatsApp — customisation is always available, just say the word there.</p>
+      </div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <!-- SAME DAY -->
+  <section class="sameday-sec" id="sameday">
+    <div class="wrap sameday-grid">
+      <div class="reveal">
+        <h2>Forgot the day? Chennai gets it today.</h2>
+        <p>Aztheticlyf delivers across Chennai the same day — a last-minute customised hamper has reached its doorstep in as little as four hours, sent by local courier. Further away is fine too: hampers travel across India and worldwide.</p>
+        <div class="facts">
+          <div class="fact"><strong>Same day</strong><span>Order today, delivered today — Chennai only</span></div>
+          <div class="fact"><strong>4 hours</strong><span>Her fastest last-minute customised delivery</span></div>
+          <div class="fact"><strong>Pan-India</strong><span>Regular dispatches across the country</span></div>
+          <div class="fact"><strong>Worldwide</strong><span>Orders have shipped as far as Canada</span></div>
+        </div>
+      </div>
+      <img class="reveal" id="samedayImg" src="assets/delivery.jpg" alt="A packed gift parcel ready for same-day delivery" width="900" height="760" loading="lazy">
+    </div>
+  </section>
+
+  <!-- WHOLESALE -->
+  <section id="wholesale">
+    <div class="wrap wholesale-grid">
+      <img class="reveal" id="wholesaleImg" src="assets/wholesale.jpg" alt="Boxes of Korean stationery and accessories packed for a wholesale order" width="900" height="1020" loading="lazy">
+      <div class="reveal">
+        <div class="sec-head" style="margin-bottom:0">
+          <h2>Start your business with her stock</h2>
+          <p>Separate from gift orders: Aztheticlyf supplies Korean stationery and accessories wholesale to resellers and new startups — customers of hers have built their own businesses on it.</p>
+        </div>
+        <ul class="checklist">
+          <li>Wholesale and reselling enquiries welcome</li>
+          <li>Korean stationery &amp; accessories for your own shop or page</li>
+          <li>Talk quantities and terms directly on WhatsApp</li>
+        </ul>
+        <a class="btn" href="https://wa.me/917871501939?text=Hi%20Aztheticlyf!%20I%27m%20interested%20in%20WHOLESALE%20%2F%20reselling%20your%20Korean%20stationery%20and%20accessories.%20Please%20share%20the%20details." target="_blank" rel="noopener">Ask About Wholesale</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARA LUXE -->
+  <section class="tara-sec" id="tara">
+    <div class="wrap tara-grid">
+      <div class="reveal">
+        <h2>Her jewellery lives at <em>Tara Luxe</em></h2>
+        <p>Aztheticlyf's anti-tarnish jewellery has its own home. Tara Luxe makes everyday pieces in 316L stainless steel with an 18k gold PVD finish — waterproof, and made to be worn daily. Browse the full collection on Instagram.</p>
+        <div class="tara-specs">
+          <span>Anti-tarnish</span><span>316L stainless steel</span><span>18k gold PVD</span><span>Waterproof</span>
+        </div>
+        <a class="btn gold" href="https://www.instagram.com/tara.luxe.in" target="_blank" rel="noopener">Visit @tara.luxe.in</a>
+      </div>
+      <img class="reveal" id="taraImg" src="assets/tara.jpg" alt="Gold-toned anti-tarnish jewellery from Tara Luxe" width="900" height="980" loading="lazy">
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>Aztheticlyf</h3>
+        <p>An aesthetic gift studio in Chennai — custom gift hampers, Korean stationery and accessories. Retail, wholesale and reselling.</p>
+      </div>
+      <div>
+        <h3>Order</h3>
+        <a href="https://wa.me/917871501939" target="_blank" rel="noopener">WhatsApp +91 7871501939</a>
+        <a href="https://wa.me/c/917871501939" target="_blank" rel="noopener">WhatsApp Catalog</a>
+        <a href="https://whatsapp.com/channel/0029VbCXET9IXnlwzl1VD32G" target="_blank" rel="noopener">WhatsApp Channel</a>
+      </div>
+      <div>
+        <h3>Follow</h3>
+        <a href="https://www.instagram.com/aztheticlyf" target="_blank" rel="noopener">Instagram — @aztheticlyf</a>
+        <a href="https://www.instagram.com/tara.luxe.in" target="_blank" rel="noopener">Tara Luxe — @tara.luxe.in</a>
+        <a href="#builder">Build Your Own Hamper</a>
+      </div>
+    </div>
+    <p class="foot-name">Aztheticlyf</p>
+    <p class="demo-note">Demo website created for Aztheticlyf for illustration. Product photography is sample imagery, not the studio's own. Prices are confirmed on WhatsApp.</p>
+    <p class="credits" id="credits">Sample photography via Unsplash (free to use under the Unsplash Licence). Images show the kind of hampers Aztheticlyf makes — they are not photographs of her actual products.</p>
+  </div>
+</footer>
+
+<script src="assets/gsap.min.js"></script>
+<script src="assets/ScrollTrigger.min.js"></script>
+<script src="assets/lenis.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.documentElement.classList.add('js');
+  var WA = "https://wa.me/917871501939";
+
+  /* ---------- Builder ---------- */
+  var OCCASIONS = ["Birthday","Anniversary","For Her","For Him","Just Because","Return Gifts"];
+  var THEMES = [
+    {name:"Purple", hex:"#7C4DA0"},
+    {name:"Pink", hex:"#C94F7C"},
+    {name:"Lavender", hex:"#9B7ED0"}
+  ];
+  var BASES = ["Korean Stationery Hamper","Bath & Bubbles Hamper","Saree Hamper","Jewellery Hamper"];
+  var ADDONS = ["Handwritten Note","Roses","Chocolates","Personalised Card"];
+
+  var state = { occasion:null, theme:null, base:null, addons:new Set() };
+
+  function chipGroup(el, items, render){
+    items.forEach(function(item){ render(el, item); });
+  }
+  function makeChip(label, group, isTheme, hex){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip' + (isTheme ? ' theme-' + label.toLowerCase() : '');
+    b.setAttribute('aria-pressed','false');
+    if(isTheme){ b.innerHTML = '<span class="dot" style="background:'+hex+'"></span>' + label; }
+    else { b.textContent = label; }
+    b.addEventListener('click', function(){
+      if(group === 'addons'){
+        var on = b.getAttribute('aria-pressed') === 'true';
+        b.setAttribute('aria-pressed', on ? 'false' : 'true');
+        if(on) state.addons.delete(label); else state.addons.add(label);
+      } else {
+        var siblings = b.parentElement.querySelectorAll('.chip');
+        siblings.forEach(function(s){ s.setAttribute('aria-pressed','false'); });
+        b.setAttribute('aria-pressed','true');
+        state[group] = label;
+      }
+      updateSummary();
+    });
+    return b;
+  }
+  chipGroup(document.getElementById('occasionChips'), OCCASIONS, function(el,i){ el.appendChild(makeChip(i,'occasion')); });
+  chipGroup(document.getElementById('themeChips'), THEMES, function(el,t){ el.appendChild(makeChip(t.name,'theme',true,t.hex)); });
+  chipGroup(document.getElementById('baseChips'), BASES, function(el,i){ el.appendChild(makeChip(i,'base')); });
+  chipGroup(document.getElementById('addonChips'), ADDONS, function(el,i){ el.appendChild(makeChip(i,'addons')); });
+
+  function setRow(id, val){
+    var el = document.getElementById(id);
+    el.textContent = val || el.dataset.empty;
+    el.classList.toggle('empty', !val);
+  }
+  ['sumOccasion','sumTheme','sumBase','sumAddons'].forEach(function(id){
+    var el=document.getElementById(id); el.dataset.empty = el.textContent;
+  });
+
+  function updateSummary(){
+    setRow('sumOccasion', state.occasion);
+    setRow('sumTheme', state.theme);
+    setRow('sumBase', state.base);
+    setRow('sumAddons', state.addons.size ? Array.from(state.addons).join(', ') : null);
+
+    var steps = (state.occasion?1:0) + (state.theme?1:0) + (state.base?1:0);
+    document.getElementById('progressFill').style.width = (steps/3*100) + '%';
+    var fill = document.getElementById('boxFill');
+    var themeObj = THEMES.find(function(t){ return t.name === state.theme; });
+    fill.style.height = (steps/3*100) + '%';
+    fill.style.background = themeObj ? themeObj.hex : 'transparent';
+    var label = document.getElementById('boxLabel');
+    if(steps === 3){
+      label.textContent = state.base.replace(' Hamper','') + ' · ' + state.theme;
+      document.getElementById('boxVisual').style.background = '#fff';
+    } else if(steps > 0){
+      label.textContent = 'Building your box…';
+      label.style.color = 'var(--ink)';
+    } else {
+      label.textContent = 'Your box is waiting';
+      label.style.color = 'var(--ink)';
+    }
+    if(steps === 3) label.style.color = '#fff';
+
+    var btn = document.getElementById('orderBtn');
+    var note = document.getElementById('orderNote');
+    if(steps === 3){
+      var lines = [
+        "Hi Aztheticlyf! I'd like to build my own hamper.",
+        "Occasion: " + state.occasion,
+        "Colour theme: " + state.theme,
+        "Hamper: " + state.base,
+        "Add-ons: " + (state.addons.size ? Array.from(state.addons).join(', ') : 'None'),
+        "Please share the price and details."
+      ];
+      btn.href = WA + "?text=" + encodeURIComponent(lines.join("\n"));
+      btn.removeAttribute('aria-disabled');
+      btn.removeAttribute('disabled');
+      note.textContent = "Ready — this opens WhatsApp with your full selection written out.";
+    } else {
+      btn.href = "#builder";
+      btn.setAttribute('aria-disabled','true');
+      note.textContent = "Choose an occasion, a colour and a hamper to continue. Price is confirmed on WhatsApp.";
+    }
+  }
+  document.getElementById('orderBtn').addEventListener('click', function(e){
+    if(state.occasion && state.theme && state.base) return;
+    e.preventDefault();
+    document.getElementById('builder').scrollIntoView({behavior:'smooth'});
+  });
+  updateSummary();
+
+  /* ---------- Ready-made cards ---------- */
+  var CARDS = [
+    { name:"Korean Stationery Hamper", span:"c-7", tint:"tint-purple", img:"assets/card-stationery.jpg",
+      alt:"A hamper of Korean stationery — diaries, notebooks and desk pieces",
+      desc:"Her signature box: Korean stationery and desk pieces, packed as a gift and finished your way.",
+      items:["Diaries & notebooks","Stationery sets","Customisation available"] },
+    { name:"Bath & Bubbles Hamper", span:"c-5", tint:"tint-pink", img:"assets/card-bath.jpg",
+      alt:"A self-care hamper with body scrubs and bath pieces",
+      desc:"A full self-care box, made to be opened slowly.",
+      items:["Pomegranate bathing scrub","Papaya body scrub","Body razors","Bathing loofah","Scalp massager brush"] },
+    { name:"Saree Hamper — TARA", span:"c-5", tint:"tint-lav", img:"assets/card-saree.jpg",
+      alt:"A saree gift hamper with a matching jewellery set and bangles",
+      desc:"The one sent to mothers and sisters — a complete outfit in a box, with a handwritten note.",
+      items:["Premium quality saree","Matching earrings & necklace set","Colourful bindi pack","Kashmiri bangles with matching glass bangles"] },
+    { name:"Purple Hamper", span:"c-4", tint:"tint-purple", img:"assets/card-purple.jpg",
+      alt:"A gift hamper in a purple colour theme",
+      desc:"Everything in the box follows one colour — deep, rich purple, end to end.", items:["Full purple theme","Customisation available"] },
+    { name:"Pink Hamper", span:"c-4", tint:"tint-pink", img:"assets/card-pink.jpg",
+      alt:"A gift hamper in a pink colour theme",
+      desc:"The pink edition — soft, bright, and packed to the top.", items:["Full pink theme","Customisation available"] },
+    { name:"Lavender Hamper", span:"c-4", tint:"tint-lav", img:"assets/card-lavender.jpg",
+      alt:"A gift hamper in a lavender colour theme",
+      desc:"Lavender calm, in a box — the quietest of her colour hampers.", items:["Full lavender theme","Customisation available"] },
+    { name:"Jewellery Hamper", span:"c-4", tint:"", img:"assets/card-jewellery.jpg",
+      alt:"A hamper of jewellery and accessories",
+      desc:"Jewellery and accessories chosen and boxed as one gift.", items:["Jewellery & accessories","Customisation available"] },
+    { name:"Birthday Hamper", span:"c-4", tint:"", img:"assets/card-birthday.jpg",
+      alt:"A birthday gift hamper",
+      desc:"Built around the birthday — tell her who it is for and she builds it around them.", items:["Made for birthdays","Handwritten note option","Same-day in Chennai"] },
+    { name:"Roses, Chocolates & a Personalised Card", span:"c-4", tint:"", img:"assets/card-roses.jpg",
+      alt:"Roses and chocolates with a personalised card",
+      desc:"Small gifts, big emotions — the classic trio, done properly.",
+      items:["Fresh roses","Premium chocolates","Personalised card","Same-day delivery in Chennai"] }
+  ];
+  var cardsEl = document.getElementById('cards');
+  CARDS.forEach(function(c){
+    var msg = "Hi Aztheticlyf! I'd like to order the " + c.name + ". Please share the price and details.";
+    var article = document.createElement('article');
+    article.className = 'card reveal ' + c.span + ' ' + c.tint;
+    article.innerHTML =
+      '<img src="'+c.img+'" alt="'+c.alt+'" loading="lazy" width="900" height="620">' +
+      '<div class="body"><h3>'+c.name+'</h3><p>'+c.desc+'</p>' +
+      '<ul>' + c.items.map(function(i){ return '<li>'+i+'</li>'; }).join('') + '</ul>' +
+      '<div class="foot"><span class="price-note">Price on WhatsApp</span>' +
+      '<a class="btn small wa" target="_blank" rel="noopener" href="'+WA+'?text='+encodeURIComponent(msg)+'">Order This One</a></div></div>';
+    cardsEl.appendChild(article);
+  });
+
+  /* ---------- Motion: Lenis + GSAP, reduced-motion safe ---------- */
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced && window.Lenis){
+    var lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('href');
+        if(id.length > 1 && document.querySelector(id)){ e.preventDefault(); lenis.scrollTo(id, {offset:-70}); }
+      });
+    });
+  }
+  if(!reduced && window.gsap && window.ScrollTrigger){
+    gsap.registerPlugin(ScrollTrigger);
+    document.querySelectorAll('.reveal').forEach(function(el){
+      gsap.fromTo(el, {y:28, opacity:0}, {
+        y:0, opacity:1, duration:.9, ease:'power3.out',
+        scrollTrigger:{ trigger: el, start: 'top 88%', once: true }
+      });
+    });
+    gsap.to('#heroImg', { scale: 1.06, ease: 'none',
+      scrollTrigger:{ trigger: '.hero', start:'top top', end:'bottom top', scrub: true } });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.style.opacity = 1; });
+  }
+})();
+</script>
+</body>
+</html>
