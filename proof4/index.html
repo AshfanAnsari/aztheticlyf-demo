@@ -298,6 +298,7 @@
      Everything is a pure function of loop time on one master clock.
      ================================================================== */
   var SLOT = 3.2, HOLD = 2.2, TURN = 1.0, N = 6;
+  var HERO_SCALE = 0.82;   /* hero products rendered at 82% of their original size (user: a bit smaller) */
   var LOOP = SLOT * N;
   var HOLD_F = HOLD / SLOT, TURN_F = TURN / SLOT;
 
@@ -459,7 +460,7 @@
         '<div class="hero-shadow"></div>' +
         '<img class="hero-img" src="' + r.hero.src + '" alt="' + r.hero.alt + '">';
     }
-    inner.style.width = (card.clientWidth * r.hero.w / 100) + "px";
+    inner.style.width = (card.clientWidth * r.hero.w / 100 * HERO_SCALE) + "px";
   }
 
   var headKey = "";
