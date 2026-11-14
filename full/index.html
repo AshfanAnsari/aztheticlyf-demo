@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aztheticlyf — Aesthetic Gift Studio · Chennai</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            'page-ground': '#F8F6F2',
+            'az-dark': '#1A1A1A',
+            'az-charcoal': '#111111',
+            'az-plum': '#241E2E',
+            'pastel-lavender': '#EDE8F5',
+            'pastel-blush': '#FCEEEB',
+            'pastel-cream': '#F7F3EC',
+            'pastel-mint': '#EAF4EE',
+            'wa-green': '#25D366',
+          },
+          borderRadius: {
+            '4xl': '32px',
+          },
+          boxShadow: {
+            'dashboard': '0 8px 30px rgba(0, 0, 0, 0.04)',
+            'pill': '0 2px 8px rgba(0, 0, 0, 0.06)',
+            'card-hover': '0 12px 32px rgba(0, 0, 0, 0.08)',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="dashboard-styling">
+    body {
+      background-color: #F8F6F2;
+      font-family: 'Poppins', sans-serif;
+      color: #1A1A1A;
+      -webkit-font-smoothing: antialiased;
+    }
+    .panel-base {
+      border-radius: 32px;
+      background-color: #FFFFFF;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.035);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tile-hover {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    }
+    .tile-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+    }
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      font-weight: 500;
+      transition: all 0.2s ease-in-out;
+    }
+    .pill-btn:active {
+      transform: scale(0.98);
+    }
+  </style>
+  <script type="module" crossorigin src="./assets/index--NH7C-dJ.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+</html>
