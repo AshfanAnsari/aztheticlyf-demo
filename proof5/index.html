@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aztheticlyf — Hero Proof V5 | Cutouts at Real-World Sizes</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root{
+    --ground:#EAE6E0;          /* neutral warm grey, like the pin's outer ground */
+    --ink:#39303E;
+    --ink-soft:#8A7F92;
+    --line:#EFE7DF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{min-height:100%}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ================= THE HERO = ONE CARD, nothing beside it ================= */
+  .hero{
+    min-height:100svh;
+    display:flex;align-items:center;justify-content:center;
+    padding:34px clamp(16px,4vw,44px) 52px;
+  }
+  .card-wrap{position:relative;width:100%;max-width:1240px}
+  .card{
+    position:relative;
+    width:100%;height:min(640px,80svh);min-height:520px;
+    background:#FFFDFB;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 34px 80px -22px rgba(57,48,62,.30), 0 4px 18px rgba(57,48,62,.10);
+  }
+  /* ---------- colour panel: FIXED geometry; two layers CROSSFADE in place ---------- */
+  .blob{
+    position:absolute;left:0;top:0;width:61%;height:100%;
+    border-radius:var(--br, 0 46% 54% 0 / 0 38% 62% 0);
+    overflow:hidden;
+    background:#7B2FE0;
+  }
+  .blob::before{
+    content:"";position:absolute;right:-15%;top:var(--bbt, 50%);
+    width:var(--bbw, 52%);aspect-ratio:1;transform:translateY(-50%);
+    border-radius:47% 53% 60% 40% / 55% 45% 55% 45%;
+    background:inherit;
+  }
+  .prim{position:absolute;pointer-events:none;will-change:transform,filter;z-index:1}
+  .prim.dot{border-radius:50%;background:rgba(255,255,255,.85)}
+  .prim.ring{border-radius:50%;border:3px solid rgba(255,255,255,.65);background:transparent}
+  .prim.pill{border-radius:999px;background:rgba(255,255,255,.45)}
+  .prim.tri{background:rgba(255,255,255,.55);clip-path:polygon(50% 0,100% 100%,0 100%)}
+  /* ---------- headline: a sliding TEXT STRIP clipped by the panel's edges ---------- */
+  .head-clip{
+    position:absolute;left:0;top:0;width:61%;height:100%;z-index:3;
+    border-radius:0 46% 54% 0 / 0 38% 62% 0;
+    overflow:hidden;pointer-events:none;
+  }
+  .head-strip{position:absolute;left:0;top:0;width:200%;height:100%;display:flex;will-change:transform}
+  .head-cell{position:relative;width:50%;height:100%;flex:none}
+  .cat-head{
+    position:absolute;left:34px;top:30px;
+    color:#fff;font-weight:600;
+    font-size:clamp(32px,3.4vw,46px);line-height:1.02;letter-spacing:.005em;
+    text-shadow:0 2px 20px rgba(0,0,0,.12);
+  }
+  .cat-head span{display:block}
+  .cat-head .l2{font-weight:300;letter-spacing:.05em}
+  /* ---------- store header: INSIDE the card, top-right, static ---------- */
+  .store-head{
+    position:absolute;right:28px;top:24px;z-index:7;text-align:right;pointer-events:none;
+  }
+  .store-head .wm{font-family:'Italiana',serif;font-size:29px;letter-spacing:.12em;line-height:1;color:var(--ink)}
+  .store-head .wm b{font-weight:400;color:#B08FD9}
+  .store-head small{
+    display:block;font-family:'Jost',sans-serif;margin-top:4px;
+    font-size:9px;font-weight:500;letter-spacing:.30em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  /* ---------- hero product: fixed anchor; outgoing exits left, incoming tumbles from top ---------- */
+  .hero-anchor{
+    position:absolute;z-index:5;
+    left:45%;top:57%;width:50%;height:66%;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .prod-layer{
+    position:absolute;inset:0;
+    display:flex;align-items:flex-end;justify-content:center;
+    will-change:transform,filter;
+  }
+  .prod-inner{position:relative;will-change:transform}
+  .hero-shadow{
+    position:absolute;left:8%;right:8%;bottom:-4%;height:9%;
+    background:radial-gradient(ellipse at center, rgba(57,48,62,.30), rgba(57,48,62,0) 68%);
+    filter:blur(6px);
+  }
+  .prod-inner img.hero-img{display:block;height:100%;width:auto;position:relative;z-index:1;
+    filter:drop-shadow(0 16px 16px rgba(57,48,62,.18))}
+  /* hamper composite (rotation 5) */
+  .hamper{position:relative}
+  .hamper .glow{
+    position:absolute;left:50%;top:33%;width:72%;height:30%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(ellipse at center, rgba(255,216,158,.95) 0%, rgba(255,216,158,.45) 45%, rgba(255,216,158,0) 72%);
+    mix-blend-mode:screen;z-index:2;pointer-events:none;will-change:opacity,transform;
+  }
+  .hamper .bow{
+    position:absolute;z-index:5;left:33.5%;top:-4.5%;width:31%;
+    transform-origin:50% 18%;will-change:transform;pointer-events:none;
+  }
+  /* ---------- product tag: fixed box inside the panel; text swaps in place ---------- */
+  .hero-tag{
+    position:absolute;left:34px;bottom:28px;z-index:4;color:#fff;
+    text-shadow:0 1px 14px rgba(0,0,0,.18);
+    will-change:opacity;
+  }
+  .hero-tag .pname{font-size:19px;font-weight:600;letter-spacing:.02em;line-height:1.15}
+  .hero-tag .pdesc{
+    margin-top:3px;font-size:10.5px;font-weight:500;
+    letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.82);
+  }
+  /* ---------- side rail: fixed frame; names swap early, thumbnails swap late ---------- */
+  .rail{
+    position:absolute;right:0;top:0;width:39%;height:100%;z-index:6;
+    padding:104px 26px 30px 34px;
+    display:flex;flex-direction:column;
+  }
+  .rail-title{font-family:'Italiana',serif;font-size:24px;letter-spacing:.05em;line-height:1.1}
+  .rail-sub{
+    margin-top:4px;font-size:10px;font-weight:500;
+    letter-spacing:.26em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .rows{margin-top:16px}
+  .srow{
+    display:grid;grid-template-columns:52px 1fr 22px;
+    align-items:center;column-gap:12px;
+    padding:11px 0;border-bottom:1px solid var(--line);
+  }
+  .srow:first-child{border-top:1px solid var(--line)}
+  .sthumb{
+    width:52px;height:52px;border-radius:13px;overflow:hidden;
+    border:1px solid rgba(57,48,62,.07);background:#fff;
+  }
+  .sthumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .sname-clip{overflow:hidden}
+  .sname{display:block;font-weight:600;font-size:15px;letter-spacing:.02em;line-height:1.15;will-change:transform}
+  .sdetail{font-size:10.5px;font-weight:400;letter-spacing:.10em;color:var(--ink-soft);text-transform:uppercase;margin-top:2px}
+  .sdetail.price{color:#7B2FE0;font-weight:600}
+  .plus{
+    width:21px;height:21px;border-radius:50%;
+    border:1.5px solid #D9D2DC;color:#9A8FA3;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;line-height:1;padding-bottom:1px;
+  }
+  .rail-note{margin-top:auto;font-size:11px;font-weight:300;letter-spacing:.06em;color:var(--ink-soft)}
+  /* ---------- floating pill toolbar: bottom-centre of the card (like the pin) ---------- */
+  .toolbar{
+    position:absolute;left:50%;bottom:0;z-index:30;
+    transform:translate(-50%,50%);
+    display:flex;align-items:center;gap:16px;
+    background:#fff;border-radius:999px;
+    padding:10px 12px 10px 20px;
+    box-shadow:0 18px 44px -12px rgba(57,48,62,.35), 0 3px 10px rgba(57,48,62,.10);
+  }
+  .dots{display:flex;gap:8px;align-items:center}
+  .dotk{width:9px;height:9px;border-radius:50%;background:#DCD2CE;transition:transform .35s ease, background .35s ease}
+  .dotk.on{transform:scale(1.35);background:var(--ink)}
+  .toolbar .sep{width:1px;height:22px;background:#E9E2DA}
+  .wa{
+    display:inline-flex;align-items:center;gap:9px;
+    background:#221C26;color:#fff;text-decoration:none;
+    font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+    padding:12px 20px 13px;border-radius:999px;
+    transition:background .3s ease;white-space:nowrap;
+  }
+  .wa:hover{background:#1FA855}
+  .wa svg{width:15px;height:15px;fill:#fff;flex:none}
+  .proof-tag{
+    position:fixed;right:18px;bottom:12px;z-index:50;
+    font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#A79B8D;
+  }
+  /* ================= mobile: card stacks internally, still nothing outside ================= */
+  @media (max-width:820px){
+    .hero{padding:20px 14px 44px;align-items:flex-start}
+    .card{height:600px;min-height:600px;border-radius:24px}
+    .blob{width:100%;height:52%;border-radius:0 0 46% 54% / 0 0 26% 26%}
+    .blob::before{right:auto;left:50%;top:auto;bottom:-32%;transform:translateX(-50%);width:58%}
+    .head-clip{width:100%;height:52%;border-radius:0 0 46% 54% / 0 0 26% 26%}
+    .cat-head{left:22px;top:20px;font-size:30px}
+    .store-head{right:18px;top:16px}
+    .store-head .wm{font-size:20px;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.25)}
+    .store-head small{color:rgba(255,255,255,.85)}
+    .hero-anchor{left:50%;top:31%;width:62%;height:50%}
+    .hero-tag{left:22px;bottom:auto;top:110px}
+    .hero-tag .pname{font-size:15px}
+    .rail{width:100%;height:48%;top:auto;bottom:0;padding:52px 20px 14px}
+    .rail-title{font-size:20px}
+    .rows{margin-top:6px}
+    .srow{padding:6px 0;grid-template-columns:42px 1fr 20px}
+    .sthumb{width:42px;height:42px;border-radius:11px}
+    .sname{font-size:13.5px}
+    .rail-note{display:none}
+    .toolbar{gap:11px;padding:8px 9px 8px 15px;max-width:94vw}
+    .toolbar .wa{font-size:10.5px;padding:10px 15px 11px;letter-spacing:.10em}
+    .proof-tag{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== THE HERO: one card. Everything lives inside it. Nothing beside it. ===== -->
+<section class="hero">
+  <div class="card-wrap">
+    <div class="card" id="card">
+
+      <!-- colour panel: two fixed layers that crossfade in place -->
+      <div class="blob" id="blobA"></div>
+      <div class="blob" id="blobB"></div>
+
+      <!-- headline: sliding text strip, clipped by the panel's edges -->
+      <div class="head-clip">
+        <div class="head-strip" id="headStrip">
+          <div class="head-cell"><div class="cat-head"><span id="catL1a">Korean</span><span class="l2" id="catL2a">Stationery</span></div></div>
+          <div class="head-cell"><div class="cat-head"><span id="catL1b">Korean</span><span class="l2" id="catL2b">Stationery</span></div></div>
+        </div>
+      </div>
+
+      <!-- store header inside the card (static) -->
+      <div class="store-head">
+        <div class="wm">Aztheticlyf<b>.</b></div>
+        <small>Aesthetic Gift Studio &middot; Chennai</small>
+      </div>
+
+      <!-- hero product stage: fixed anchor, two product layers -->
+      <div class="hero-anchor" id="heroAnchor">
+        <div class="prod-layer" id="prodA"><div class="prod-inner" id="prodInnerA"></div></div>
+        <div class="prod-layer" id="prodB"><div class="prod-inner" id="prodInnerB"></div></div>
+      </div>
+
+      <!-- product tag: fixed box; text swaps in place -->
+      <div class="hero-tag" id="heroTag">
+        <div class="pname" id="pname">Kuromi Notebook</div>
+        <div class="pdesc" id="pdesc">Notebook &middot; with pen</div>
+      </div>
+
+      <!-- side rail: fixed frame; content swaps in place, in two stages -->
+      <div class="rail">
+        <div class="rail-head" id="railHead">
+          <div class="rail-title" id="railTitle">Also in Stationery</div>
+          <div class="rail-sub" id="railSub">Korean Stationery &middot; more to love</div>
+        </div>
+        <div class="rows" id="rows"></div>
+        <div class="rail-note">Order any of these on WhatsApp &middot; Same-day delivery in Chennai</div>
+      </div>
+
+    </div>
+
+    <!-- floating pill toolbar, bottom-centre of the card -->
+    <div class="toolbar">
+      <div class="dots" id="dots"></div>
+      <div class="sep"></div>
+      <a class="wa" href="https://wa.me/917871501939?text=Hi%20Aztheticlyf!%20I%27d%20like%20to%20order%20a%20gift%20hamper." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.13a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.54-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.22-.08-.39-.12-.55.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.38-2-1.23-.73-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.32-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.68.31-.25.25-.93.92-.93 2.27 0 1.34.98 2.64 1.11 2.82.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.53-.08 1.47-.6 1.69-1.28.22-.68.22-1.27.16-1.39-.06-.13-.23-.2-.48-.32z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="proof-tag">Hero concept proof &middot; V5</div>
+
+<script src="assets/gsap.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  /* ==================================================================
+     V5 — cutout edition of V4: same card, same choreography, but every
+     hero product is rendered at its REAL-WORLD relative size (cm table
+     in the data; Teddy 26 cm anchors 330 px) and all six stand on one
+     shared baseline. Rotation 5 is now Decorated Chocolates.
+     V4 — THE CARD IS THE WHOLE HERO, and the card NEVER moves.
+     Choreography follows the 90fps measured re-study of the pin
+     (ADDENDUM-90FPS.md), transition-local u in [0,1] over a 1.0s
+     transition (hold 2.2s, slot 3.2s, loop 19.2s):
+       headline strip slides left          u 0.02 - 0.47
+       panel crossfades in place           u 0.05 - 0.70
+       table names hard-swap               u 0.20   (outgoing names
+                                            micro-slide + clip first)
+       product tag swaps (fast crossfade)  u ~0.25
+       product HOLDS STILL                 u 0    - 0.35
+       outgoing product swings out left    u 0.35 - 0.65
+       thumbnails swap (they lag)          u 0.88
+       incoming product tumbles from top   u 0.55 - 1.00, tipped ~-86deg
+                                            until u 0.88, spring-settles
+                                            LAST at u 1.00
+       primitives swing early, blurred     u 0.05 - 0.40
+     Everything is a pure function of loop time on one master clock.
+     ================================================================== */
+  var SLOT = 3.2, HOLD = 2.2, TURN = 1.0, N = 6;
+  /* V5: products sized by REAL-WORLD height. Reference: Teddy 26 cm = 330 px
+     at the 1240 px design card width; every other product scales as cm/26.
+     All products stand on one shared baseline (the anchor's bottom edge). */
+  var REF_CM = 26, REF_PX = 330, DESIGN_W = 1240;
+  var LOOP = SLOT * N;
+  var HOLD_F = HOLD / SLOT, TURN_F = TURN / SLOT;
+
+  var ROTS = [
+    { cat:"Korean Stationery", l1:"Korean", l2:"Stationery", color:"#7B2FE0", rgb:[123,47,224],
+      shape:{br:"0 46% 54% 0 / 0 38% 62% 0", bbw:"52%", bbt:"50%"},
+      hero:{src:"assets/hero-notebook.png", cm:21, alt:"Kuromi notebook with pen"},
+      pname:"Kuromi Notebook", pdesc:"Notebook &middot; with pen",
+      rail:"Also in Stationery",
+      rows:[
+        {img:"assets/thumb-pens.png",       name:"Ice Cream Pens",  detail:"Novelty gel pens"},
+        {img:"assets/thumb-washi.png",      name:"Washi Tapes",     detail:"Pastel rolls"},
+        {img:"assets/thumb-calculator.png", name:"Mini Calculator", detail:"Pastel pocket size"}
+      ]},
+    { cat:"Hair Accessories", l1:"Hair", l2:"Accessories", color:"#FF5C93", rgb:[255,92,147],
+      shape:{br:"0 52% 48% 0 / 0 44% 56% 0", bbw:"46%", bbt:"44%"},
+      hero:{src:"assets/item-claw.png", cm:10, alt:"Korean tulip fur claw clip"},
+      pname:"Korean Tulip Fur Claw", pdesc:"Pastel claw clip",
+      rail:"Also in Hair",
+      rows:[
+        {img:"assets/thumb-scrunchie.png", name:"Satin Scrunchies", detail:"Set of 4"},
+        {img:"assets/thumb-butterfly.png", name:"Butterfly Clips",  detail:"Pastel set"},
+        {img:"assets/thumb-bow.png",       name:"Statement Bow",    detail:"Satin ribbon"}
+      ]},
+    { cat:"Beauty", l1:"Beauty", l2:"Minis", color:"#E64980", rgb:[230,73,128],
+      shape:{br:"0 42% 58% 0 / 0 34% 66% 0", bbw:"58%", bbt:"56%"},
+      hero:{src:"assets/hero-lipstick.png", cm:8, alt:"Panda lipstick"},
+      pname:"Panda Lipstick", pdesc:"Cute novelty tube",
+      rail:"Also in Beauty",
+      rows:[
+        {img:"assets/thumb-lipgloss.png", name:"Ice Cream Lip Gloss",     detail:"Glossy shine"},
+        {img:"assets/thumb-keychain.png", name:"Panda Lipstick Keychain", detail:"Mini charm"},
+        {img:"assets/thumb-sponges.png",  name:"Makeup Sponge Set",       detail:"Beauty blenders"}
+      ]},
+    { cat:"Jewellery", l1:"Anti-Tarnish", l2:"Jewellery", color:"#D9A62E", rgb:[217,166,46],
+      shape:{br:"0 50% 50% 0 / 0 40% 60% 0", bbw:"49%", bbt:"47%"},
+      hero:{src:"assets/hero-bracelet.png", cm:7, alt:"Gold tulip bracelet"},
+      pname:"Tulip Bracelet", pdesc:"Stainless steel &middot; anti-tarnish",
+      rail:"Also in Jewellery",
+      rows:[
+        {img:"assets/thumb-oxidised.png",     name:"Oxidised Earrings", detail:"Floral &middot; pearl drops"},
+        {img:"assets/thumb-jhumka.png",       name:"Jhumka Collection", detail:"Traditional bells"},
+        {img:"assets/thumb-jewellerybox.png", name:"Jewellery Box",     detail:"\u20B9149", price:true}
+      ]},
+    { cat:"Chocolate Hampers", l1:"Chocolate", l2:"Hampers", color:"#9E7BFF", rgb:[158,123,255],
+      shape:{br:"0 44% 56% 0 / 0 36% 64% 0", bbw:"55%", bbt:"52%"},
+      hero:{src:"assets/hero-chocolates.png", cm:20, alt:"Decorated chocolate gift arrangement with satin bow"},
+      pname:"Decorated Chocolates", pdesc:"Chocolate hamper",
+      rail:"Also in Chocolate",
+      rows:[
+        {img:"assets/thumb-kitkat.png",          name:"Kit Kat Hamper",      detail:"Wafer chocolate box"},
+        {img:"assets/thumb-chocolatehamper.png", name:"Chocolate Hamper",    detail:"Assorted foil chocolates"},
+        {img:"assets/thumb-roses.png",           name:"Roses &amp; Chocolates", detail:"Roses &middot; personalised card"}
+      ]},
+    { cat:"Kids", l1:"Kids", l2:"Gifting", color:"#2F7CF6", rgb:[47,124,246],
+      shape:{br:"0 54% 46% 0 / 0 46% 54% 0", bbw:"44%", bbt:"42%"},
+      hero:{src:"assets/item-teddy.png", cm:26, alt:"Teddy hamper teddy bear"},
+      pname:"Teddy Hamper", pdesc:"Soft teddy &middot; mini goodies",
+      rail:"Also in Kids",
+      rows:[
+        {img:"assets/thumb-unicorn.png",   name:"Unicorn Hamper",       detail:"Pastel dream box"},
+        {img:"assets/thumb-kuromibox.png", name:"Kuromi Labubu Hamper", detail:"Notebooks &amp; pens"},
+        {img:"assets/thumb-mystery.png",   name:"Mystery Scoop Box",    detail:"Surprise scoops"}
+      ]}
+  ];
+  var PRIMS = [
+    {kind:"dot",  x:10, y:66, s:15, p:0.0},
+    {kind:"pill", x:28, y:82, s:34, p:1.7},
+    {kind:"ring", x:74, y:30, s:22, p:3.1},
+    {kind:"tri",  x:90, y:58, s:14, p:4.4},
+    {kind:"dot",  x:40, y:60, s:9,  p:5.6}
+  ];
+
+  /* ---------- refs ---------- */
+  var card     = document.getElementById("card");
+  var blobEls  = [document.getElementById("blobA"), document.getElementById("blobB")];
+  var strip    = document.getElementById("headStrip");
+  var catL1    = [document.getElementById("catL1a"), document.getElementById("catL1b")];
+  var catL2    = [document.getElementById("catL2a"), document.getElementById("catL2b")];
+  var heroTag  = document.getElementById("heroTag");
+  var pname    = document.getElementById("pname");
+  var pdesc    = document.getElementById("pdesc");
+  var railTitle= document.getElementById("railTitle");
+  var railSub  = document.getElementById("railSub");
+  var rowsEl   = document.getElementById("rows");
+  var prodEls  = [document.getElementById("prodA"), document.getElementById("prodB")];
+  var prodInners = [document.getElementById("prodInnerA"), document.getElementById("prodInnerB")];
+  var dotsEl   = document.getElementById("dots");
+
+  /* primitives live inside each blob layer (they crossfade with their panel) */
+  var primSets = blobEls.map(function(blob){
+    return PRIMS.map(function(p){
+      var d = document.createElement("div");
+      d.className = "prim " + p.kind;
+      d.style.left = p.x + "%"; d.style.top = p.y + "%";
+      d.style.width = p.s + "px";
+      d.style.height = (p.kind === "pill" ? Math.round(p.s * 0.42) : p.s) + "px";
+      blob.appendChild(d);
+      return d;
+    });
+  });
+
+  /* side-list rows: built once; names and thumbnails are rewritten at
+     different instants (names u=0.20, thumbnails u=0.88) */
+  var rowEls = [];
+  for (var ri = 0; ri < 3; ri++){
+    var row = document.createElement("div");
+    row.className = "srow";
+    row.innerHTML =
+      '<div class="sthumb"><img alt=""></div>' +
+      '<div><div class="sname-clip"><span class="sname"></span></div><div class="sdetail"></div></div>' +
+      '<div class="plus">+</div>';
+    rowsEl.appendChild(row);
+    rowEls.push({
+      img: row.querySelector("img"),
+      name: row.querySelector(".sname"),
+      detail: row.querySelector(".sdetail")
+    });
+  }
+
+  /* dots: built once; only the .on class moves */
+  var dotEls = ROTS.map(function(){
+    var d = document.createElement("div");
+    d.className = "dotk";
+    dotsEl.appendChild(d);
+    return d;
+  });
+
+  /* preload hero images so swaps never flicker */
+  ROTS.forEach(function(r){ if (r.hero.src){ var im = new Image(); im.src = r.hero.src; } });
+
+  /* ---------- content loaders (cached; DOM writes only on change) ---------- */
+  var blobRot = [-1, -1];
+  function loadBlob(L, i){
+    if (blobRot[L] === i) return;
+    blobRot[L] = i;
+    var b = blobEls[L];
+    b.style.background = ROTS[i].color;
+    b.style.setProperty("--br", ROTS[i].shape.br);
+    b.style.setProperty("--bbw", ROTS[i].shape.bbw);
+    b.style.setProperty("--bbt", ROTS[i].shape.bbt);
+  }
+
+  var prodRot = [-1, -1];
+  function loadProd(L, i){
+    if (prodRot[L] === i) return;
+    prodRot[L] = i;
+    var r = ROTS[i], inner = prodInners[L];
+    inner.innerHTML =
+      '<div class="hero-shadow"></div>' +
+      '<img class="hero-img" src="' + r.hero.src + '" alt="' + r.hero.alt + '">';
+    /* real-world size: display height = (cm / REF_CM) x REF_PX, scaled to
+       the live card width; width follows the cutout's natural aspect */
+    inner.style.height = (card.clientWidth * (r.hero.cm / REF_CM) * REF_PX / DESIGN_W) + "px";
+  }
+
+  var headKey = "";
+  function setHeadline(a, b){
+    var key = a + "|" + b;
+    if (headKey === key) return;
+    headKey = key;
+    catL1[0].textContent = ROTS[a].l1; catL2[0].textContent = ROTS[a].l2;
+    catL1[1].textContent = ROTS[b].l1; catL2[1].textContent = ROTS[b].l2;
+  }
+
+  var namesIdx = -1;
+  function applyNames(i){
+    if (namesIdx === i) return;
+    namesIdx = i;
+    railTitle.textContent = ROTS[i].rail;
+    railSub.innerHTML = ROTS[i].cat + " &middot; more to love";
+    ROTS[i].rows.forEach(function(row, k){
+      rowEls[k].name.innerHTML = row.name;
+      rowEls[k].detail.innerHTML = row.detail;
+      rowEls[k].detail.className = "sdetail" + (row.price ? " price" : "");
+    });
+  }
+  var thumbsIdx = -1;
+  function applyThumbs(i){
+    if (thumbsIdx === i) return;
+    thumbsIdx = i;
+    ROTS[i].rows.forEach(function(row, k){ rowEls[k].img.src = row.img; });
+  }
+  var tagIdx = -1;
+  function applyTag(i){
+    if (tagIdx === i) return;
+    tagIdx = i;
+    pname.innerHTML = ROTS[i].pname;
+    pdesc.innerHTML = ROTS[i].pdesc;
+  }
+  var dotIdx = -1;
+  function applyDots(i){
+    if (dotIdx === i) return;
+    dotIdx = i;
+    dotEls.forEach(function(d, k){ d.classList.toggle("on", k === i); });
+  }
+
+  /* ---------- helpers ---------- */
+  function clamp01(v){ return v < 0 ? 0 : (v > 1 ? 1 : v); }
+  function smooth(u){ u = clamp01(u); return u * u * (3 - 2 * u); }
+  function easeOutBack(u, c){ u = clamp01(u); return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); }
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- master frame ---------- */
+  function frame(time){
+    var lt = time % LOOP;
+    var slotPos = lt / SLOT;
+    var g = Math.floor(slotPos);
+    var frac = slotPos - g;
+    var inTurn = frac > HOLD_F;
+    var u = inTurn ? (frac - HOLD_F) / TURN_F : 0;      /* transition-local 0..1 */
+    var cur = g, nxt = (g + 1) % N;
+    var parity = Math.floor(time / SLOT) % 2;            /* absolute slot parity: layer roles */
+    var W2 = 2 * Math.PI / LOOP;
+
+    /* ===== PANEL: crossfade in place (incoming layer fades OVER outgoing) ===== */
+    var Lcur = parity, Lnxt = 1 - parity;
+    loadBlob(Lcur, cur); loadBlob(Lnxt, nxt);
+    var cross = inTurn ? smooth((u - 0.05) / 0.65) : 0;
+    blobEls[Lcur].style.opacity = "1";
+    blobEls[Lcur].style.zIndex = "0";
+    blobEls[Lnxt].style.opacity = cross.toFixed(3);
+    blobEls[Lnxt].style.zIndex = "1";
+
+    /* primitives: gentle loop-periodic drift; during the early transition
+       they swing across, slightly blurred (measured: u 0.05-0.40) */
+    var sp = (inTurn && u < 0.45) ? Math.sin(Math.PI * clamp01((u - 0.05) / 0.35)) : 0;
+    for (var L = 0; L < 2; L++){
+      for (var k = 0; k < primSets[L].length; k++){
+        var P = PRIMS[k];
+        var dx = Math.sin(lt * W2 * 2 + P.p * 1.9) * 9  - 36 * sp;
+        var dy = Math.cos(lt * W2 * 3 + P.p * 2.4) * 11 - 13 * sp;
+        var rr = Math.sin(lt * W2 + P.p) * 14 + 22 * sp;
+        primSets[L][k].style.transform = "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px) rotate(" + rr.toFixed(1) + "deg)";
+        primSets[L][k].style.filter = sp > 0.25 ? "blur(" + (1.3 * sp).toFixed(2) + "px)" : "";
+      }
+    }
+
+    /* ===== HEADLINE: strip slides left, clipped by the panel (u 0.02-0.47) ===== */
+    if (inTurn){
+      setHeadline(cur, nxt);
+      var slide = smooth((u - 0.02) / 0.45);
+      strip.style.transform = "translateX(" + (-50 * slide).toFixed(3) + "%)";
+    } else {
+      setHeadline(cur, cur);
+      strip.style.transform = "translateX(0%)";
+    }
+
+    /* ===== TABLE: names swap at u=0.20 (micro-slide + clip before),
+           thumbnails lag to u=0.88 ===== */
+    var nameSlide = (inTurn && u < 0.20) ? -16 * clamp01((u - 0.03) / 0.17) : 0;
+    applyNames((inTurn && u >= 0.20) ? nxt : cur);
+    rowEls.forEach(function(rw){ rw.name.style.transform = "translateX(" + nameSlide.toFixed(1) + "px)"; });
+    applyThumbs((inTurn && u >= 0.88) ? nxt : cur);
+
+    /* ===== PRODUCT TAG: fast crossfade swap centred on u=0.25 ===== */
+    var tagFade = inTurn ? clamp01(Math.abs(u - 0.25) / 0.05) : 1;
+    applyTag((inTurn && u >= 0.25) ? nxt : cur);
+    heroTag.style.opacity = tagFade.toFixed(3);
+
+    applyDots((inTurn && u >= 0.5) ? nxt : cur);
+
+    /* ===== PRODUCT: still, exit left, tumble in from the top, settle last ===== */
+    var Pcur = prodEls[parity], Pnxt = prodEls[1 - parity];
+    var Icur = prodInners[parity], Inxt = prodInners[1 - parity];
+    loadProd(parity, cur);
+    if (inTurn) loadProd(1 - parity, nxt);
+
+    /* hold-float: amplitude tapers out over the last 0.25s of the hold and
+       back in over the first 0.25s, so the product is pixel-still from the
+       moment the transition begins (measured: still for u 0-0.35) */
+    var slotT = lt - g * SLOT;
+    var amp = 1;
+    if (inTurn) amp = 0;
+    else if (slotT > HOLD - 0.25) amp = (HOLD - slotT) / 0.25;
+    else if (slotT < 0.25) amp = slotT / 0.25;
+    var bobA  = Math.sin(lt * W2 * 3) * 5 * amp;
+    var swayA = Math.sin(lt * W2 * 2) * 1.4 * amp;
+    Icur.style.transform = "translateY(" + bobA.toFixed(2) + "px) rotate(" + swayA.toFixed(3) + "deg)";
+
+    if (!inTurn){
+      Pcur.style.display = "flex";
+      Pcur.style.transform = "";
+      Pcur.style.filter = "";
+      Pnxt.style.display = "none";
+    } else {
+      /* outgoing: still until u=0.35, then swings out to the left */
+      var exitP = smooth((u - 0.35) / 0.30);
+      Pcur.style.display = "flex";
+      Pcur.style.transform = exitP > 0 ?
+        "translateX(" + (-165 * exitP).toFixed(2) + "%) rotate(" + (-16 * exitP).toFixed(2) + "deg)" : "";
+      Pcur.style.filter = exitP > 0 && exitP < 1 ? "blur(" + (3 * Math.sin(Math.PI * exitP)).toFixed(2) + "px)" : "";
+      /* incoming: tumbles in from the top from u=0.55; travels down to
+         centre by u~0.92 while still tipped ~-86deg, then spring-settles */
+      if (u < 0.55){
+        Pnxt.style.display = "none";
+      } else {
+        var t = (u - 0.55) / 0.45;
+        var posP = smooth((u - 0.55) / 0.37);
+        var rotP = easeOutBack((u - 0.88) / 0.12, 1.8);
+        var ty = -118 * (1 - posP);
+        var tx = -5 * (1 - posP);
+        var rot = -86 * (1 - rotP);
+        var tblur = 4 * Math.sin(Math.PI * clamp01(t)) * (1 - clamp01((u - 0.88) / 0.12));
+        Pnxt.style.display = "flex";
+        Pnxt.style.transform = "translate(" + tx.toFixed(2) + "%, " + ty.toFixed(2) + "%) rotate(" + rot.toFixed(2) + "deg)";
+        Pnxt.style.filter = tblur > 0.25 ? "blur(" + tblur.toFixed(2) + "px)" : "";
+        Inxt.style.transform = "";
+      }
+    }
+  }
+
+  if (reduced){
+    loadBlob(0, 0); loadBlob(1, 0);
+    blobEls[0].style.opacity = "1"; blobEls[1].style.opacity = "0";
+    setHeadline(0, 0);
+    applyNames(0); applyThumbs(0); applyTag(0); applyDots(0);
+    loadProd(0, 0);
+    prodEls[0].style.display = "flex";
+    prodEls[1].style.display = "none";
+  } else {
+    gsap.ticker.add(function(){ frame(gsap.ticker.time); });
+  }
+})();
+</script>
+</body>
+</html>
