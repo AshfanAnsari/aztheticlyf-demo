@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aztheticlyf — Hero Proof V2 | Turning Colour Worlds</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root{
+    --ground:#EAE6E0;
+    --ink:#39303E;
+    --ink-soft:#8A7F92;
+    --line:#EFE9E4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ================= stage ================= */
+  .stage{
+    height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:clamp(12px,3vh,34px) clamp(12px,3vw,40px);
+    position:relative;
+  }
+  /* ================= card ================= */
+  .card{
+    position:relative;
+    width:min(1140px,95vw);
+    height:min(680px,86svh);
+    background:#fff;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 34px 80px -22px rgba(57,48,62,.30), 0 4px 18px rgba(57,48,62,.10);
+    perspective:1500px;
+  }
+  /* ---------- world layers ---------- */
+  .world{
+    position:absolute;inset:0;
+    will-change:transform,opacity;
+    background:#fff;
+  }
+  .panel{
+    position:absolute;left:0;top:0;
+    width:57%;height:100%;
+    border-radius:0 46% 54% 0 / 0 38% 62% 0;
+    overflow:hidden;
+  }
+  .panel::before{ /* extra blob bulge at the seam */
+    content:"";position:absolute;
+    right:-16%;top:50%;
+    width:52%;aspect-ratio:1;
+    transform:translateY(-50%);
+    border-radius:47% 53% 60% 40% / 55% 45% 55% 45%;
+    background:inherit;
+  }
+  .eyebrow{
+    position:absolute;left:38px;top:34px;
+    font-size:10.5px;font-weight:500;
+    letter-spacing:.30em;text-transform:uppercase;
+    color:rgba(255,255,255,.75);
+  }
+  .headline{
+    position:absolute;left:38px;top:64px;
+    font-weight:600;
+    font-size:clamp(36px,4.4vw,58px);
+    line-height:1.0;
+    letter-spacing:.005em;
+    color:#fff;
+    text-shadow:0 2px 22px rgba(0,0,0,.10);
+  }
+  .headline span{display:block}
+  .headline .l2{font-weight:300;letter-spacing:.06em}
+  .prim{position:absolute;pointer-events:none;will-change:transform}
+  .prim.dot{border-radius:50%;background:rgba(255,255,255,.85)}
+  .prim.ring{border-radius:50%;border:3px solid rgba(255,255,255,.65);background:transparent}
+  .prim.pill{border-radius:999px;background:rgba(255,255,255,.45)}
+  .prim.tri{background:rgba(255,255,255,.55);clip-path:polygon(50% 0,100% 100%,0 100%)}
+  /* ---------- product table ---------- */
+  .table-wrap{
+    position:absolute;right:0;top:0;
+    width:43%;height:100%;
+    padding:86px 40px 96px 86px;
+    display:flex;flex-direction:column;
+  }
+  .table-title{
+    font-family:'Italiana',serif;
+    font-size:29px;letter-spacing:.05em;line-height:1.1;
+  }
+  .table-sub{
+    margin-top:5px;
+    font-size:10.5px;font-weight:500;
+    letter-spacing:.26em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .rows{margin-top:22px}
+  .trow{
+    display:grid;
+    grid-template-columns:48px 1fr auto 24px;
+    align-items:center;
+    column-gap:14px;
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .trow:first-child{border-top:1px solid var(--line)}
+  .thumb{
+    width:48px;height:48px;border-radius:13px;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .thumb img{max-width:88%;max-height:88%;object-fit:contain}
+  .tname{font-weight:600;font-size:16.5px;letter-spacing:.02em;line-height:1.15}
+  .tcap{font-size:11px;font-weight:400;letter-spacing:.10em;color:var(--ink-soft);text-transform:uppercase;margin-top:2px}
+  .tprice{font-weight:600;font-size:16.5px;letter-spacing:.02em;white-space:nowrap}
+  .plus{
+    width:23px;height:23px;border-radius:50%;
+    border:1.5px solid #D9D2DC;color:#9A8FA3;
+    display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:400;line-height:1;padding-bottom:1px;
+  }
+  .table-note{
+    margin-top:auto;
+    font-size:11.5px;font-weight:300;letter-spacing:.08em;color:var(--ink-soft);
+  }
+  /* ---------- fixed chrome ---------- */
+  .card-head{
+    position:absolute;top:24px;right:30px;z-index:30;
+    text-align:right;pointer-events:none;
+  }
+  .card-head .wm{
+    font-family:'Italiana',serif;
+    font-size:27px;letter-spacing:.13em;line-height:1;
+  }
+  .card-head .wm b{font-weight:400;color:#B08FD9}
+  .card-head .tag{
+    margin-top:4px;
+    font-size:9.5px;font-weight:500;
+    letter-spacing:.30em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .toolbar{
+    position:absolute;left:50%;bottom:22px;z-index:30;
+    transform:translateX(-50%);
+    display:flex;align-items:center;gap:15px;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(57,48,62,.08);
+    box-shadow:0 14px 34px -10px rgba(57,48,62,.28);
+    border-radius:999px;
+    padding:8px 8px 8px 18px;
+    white-space:nowrap;
+  }
+  .dots{display:flex;gap:8px;align-items:center}
+  .dotk{width:9px;height:9px;border-radius:50%;background:#DCD5D2;transition:background .35s ease, transform .35s ease}
+  .dotk.on{transform:scale(1.25)}
+  .wa{
+    display:inline-flex;align-items:center;gap:9px;
+    background:#221C26;color:#fff;text-decoration:none;
+    font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+    padding:12px 20px 13px;border-radius:999px;
+    transition:background .3s ease;
+  }
+  .wa:hover{background:#1FA855}
+  .wa svg{width:16px;height:16px;fill:#fff;flex:none}
+  /* ---------- the constant box ---------- */
+  .box-anchor{
+    position:absolute;z-index:20;
+    left:55.5%;top:58%;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .box-swing{will-change:transform,filter}
+  .box-wrap{position:relative;will-change:transform}
+  .box-shadow{
+    position:absolute;left:6%;right:6%;bottom:-3.5%;height:9%;
+    background:radial-gradient(ellipse at center, rgba(57,48,62,.30), rgba(57,48,62,0) 68%);
+    filter:blur(6px);
+  }
+  .box-img{display:block;width:100%;height:auto;position:relative;z-index:1}
+  .glow{
+    position:absolute;left:50%;top:33%;
+    width:72%;height:30%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(ellipse at center, rgba(255,216,158,.95) 0%, rgba(255,216,158,.45) 45%, rgba(255,216,158,0) 72%);
+    mix-blend-mode:screen;z-index:2;pointer-events:none;
+    will-change:opacity,transform;
+  }
+  .items{position:absolute;inset:0;z-index:3}
+  .box-front{
+    position:absolute;inset:0;z-index:4;
+    clip-path:inset(49.5% 0 0 0);
+    pointer-events:none;
+  }
+  .box-front img{display:block;width:100%;height:auto}
+  .bow{
+    position:absolute;z-index:5;
+    left:33.5%;top:-4.5%;width:31%;
+    transform-origin:50% 18%;
+    will-change:transform;pointer-events:none;
+  }
+  .item{position:absolute;left:0;top:0;will-change:transform,opacity;opacity:0;pointer-events:none}
+  .item img{display:block;width:100%;height:auto;filter:drop-shadow(0 14px 14px rgba(57,48,62,.22))}
+  .label{
+    position:absolute;left:0;top:0;z-index:25;
+    padding:6px 12px 7px;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(4px);
+    border:1px solid rgba(57,48,62,.14);
+    border-radius:999px;
+    font-size:10.5px;font-weight:500;
+    letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink);white-space:nowrap;
+    opacity:0;will-change:transform,opacity;pointer-events:none;
+    box-shadow:0 8px 20px -8px rgba(57,48,62,.30);
+  }
+  .proof-tag{
+    position:absolute;right:22px;bottom:16px;
+    font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+    color:#A79C93;
+  }
+  /* ================= mobile ================= */
+  @media (max-width:700px){
+    .card{height:88svh;border-radius:24px}
+    .panel{
+      width:100%;height:47.5%;
+      border-radius:0 0 46% 54% / 0 0 30% 30%;
+    }
+    .panel::before{right:auto;left:50%;top:auto;bottom:-30%;transform:translateX(-50%);width:60%}
+    .eyebrow{display:none}
+    .headline{left:24px;top:30px;font-size:clamp(30px,8.6vw,40px)}
+    .table-wrap{
+      width:100%;height:52.5%;top:auto;bottom:0;
+      padding:94px 22px 84px;
+    }
+    .table-title{font-size:23px}
+    .rows{margin-top:12px}
+    .trow{padding:8px 0;grid-template-columns:40px 1fr auto 22px}
+    .thumb{width:40px;height:40px;border-radius:11px}
+    .tname{font-size:14.5px}.tprice{font-size:14.5px}
+    .table-note{display:none}
+    .card-head{top:16px;right:18px;background:rgba(255,255,255,.88);backdrop-filter:blur(6px);border-radius:14px;padding:8px 12px 9px}
+    .card-head .wm{font-size:20px}
+    .card-head .tag{display:none}
+    .box-anchor{left:50%;top:41.5%}
+    .toolbar{bottom:14px;gap:11px;padding-left:14px}
+    .wa{font-size:10.5px;padding:10px 15px 11px;letter-spacing:.12em}
+    .label{font-size:9px;padding:5px 10px 6px;letter-spacing:.16em}
+    .proof-tag{display:none}
+  }
+</style>
+</head>
+<body>
+<section class="stage">
+  <div class="card" id="card">
+
+    <!-- world layers are built by JS from WORLDS data -->
+
+    <!-- the one constant box, riding the seam -->
+    <div class="box-anchor" id="boxAnchor">
+      <div class="box-swing" id="boxSwing">
+        <div class="box-wrap" id="boxWrap">
+          <div class="box-shadow"></div>
+          <img class="box-img" src="assets/box.png" alt="Open Aztheticlyf gift hamper box with pastel tissue">
+          <div class="glow" id="glow"></div>
+          <div class="items" id="items"></div>
+          <div class="box-front"><img src="assets/box.png" alt="" aria-hidden="true"></div>
+          <img class="bow" id="bow" src="assets/bow.png" alt="" aria-hidden="true">
+        </div>
+      </div>
+    </div>
+
+    <!-- fixed chrome -->
+    <div class="card-head">
+      <div class="wm">Aztheticlyf<b>.</b></div>
+      <div class="tag">Aesthetic Gift Studio</div>
+    </div>
+
+    <div class="toolbar">
+      <div class="dots" id="dots"></div>
+      <a class="wa" href="https://wa.me/917871501939?text=Hi%20Aztheticlyf!%20I%27d%20like%20to%20order%20a%20gift%20hamper." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.13a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.54-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.22-.08-.39-.12-.55.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.38-2-1.23-.73-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.32-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.68.31-.25.25-.93.92-.93 2.27 0 1.34.98 2.64 1.11 2.82.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.53-.08 1.47-.6 1.69-1.28.22-.68.22-1.27.16-1.39-.06-.13-.23-.2-.48-.32z"/></svg>
+        Order on WhatsApp
+      </a>
+    </div>
+
+  </div>
+  <div class="proof-tag">Hero concept proof · V2</div>
+</section>
+
+<script src="assets/gsap.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  /* ==================================================================
+     V2 — "turning colour worlds, one constant box"
+     One parametric master clock (GSAP ticker). Every transform is a
+     pure function of loop time — no chained tweens, seamless by
+     construction. Loop = 4 worlds x 3.1s = 12.4s (hold 2.5 + turn 0.6)
+     ================================================================== */
+  var SLOT = 3.1, HOLD = 2.5, TURN = 0.6, NW = 4;
+  var LOOP = SLOT * NW;
+  var HOLD_F = HOLD / SLOT, TURN_F = TURN / SLOT;
+
+  var ITEM_CFG = { /* geometry per product, proven in V1 (rescaled for the smaller box) */
+    diary:     {src:"assets/item-diary.png",     label:"Korean Stationery",  w:0.300, hx:-0.56, hy:-0.235, rot:-5, side:-1},
+    chocolates:{src:"assets/item-chocolates.png",label:"Chocolate Hamper",   w:0.355, hx: 0.50, hy:-0.295, rot: 7, side: 1},
+    lipgloss:  {src:"assets/item-lipgloss.png",  label:"Beauty",             w:0.105, hx: 0.44, hy:-0.335, rot: 5, side: 1},
+    claw:      {src:"assets/item-claw.png",      label:"Korean Accessories", w:0.355, hx:-0.52, hy:-0.255, rot: 6, side:-1},
+    scrunchie: {src:"assets/item-scrunchie.png", label:"Hair Accessories",   w:0.355, hx:-0.54, hy:-0.275, rot:-7, side:-1},
+    teddy:     {src:"assets/item-teddy.png",     label:"Teddy Hamper",       w:0.315, hx: 0.55, hy:-0.235, rot:-4, side: 1},
+    tumbler:   {src:"assets/item-tumbler.png",   label:"Accessories",        w:0.285, hx:-0.55, hy:-0.265, rot: 5, side:-1}
+  };
+  /* items rise in pairs during each world's hold: A first, B follows */
+  var JOURNEY = [ {t0:0.30, rise:0.75, holdEnd:1.80, sink:0.55},
+                  {t0:0.85, rise:0.75, holdEnd:1.95, sink:0.50} ];
+
+  var WORLDS = [
+    { name:"Purple Hamper",   l1:"Purple",   l2:"Hamper", color:"#7B2FE0",
+      items:["diary","chocolates"] },
+    { name:"Pink Hamper",     l1:"Pink",     l2:"Hamper", color:"#FF5C93",
+      items:["lipgloss","claw"] },
+    { name:"Lavender Hamper", l1:"Lavender", l2:"Hamper", color:"#9E7BFF",
+      items:["scrunchie","teddy"] },
+    { name:"Blue Hamper",     l1:"Blue",     l2:"Hamper", color:"#2F7CF6",
+      items:["tumbler","chocolates"] }
+  ];
+  var TIERS = [ {tier:"Bliss", price:"\u20B9499"}, {tier:"Premium", price:"\u20B9999"}, {tier:"Luxe", price:"\u20B91,499"} ];
+  var PRIMS = [ /* floating primitives per world: kind, left%, top%, size, drift phases */
+    {kind:"dot",  x:12, y:64, s:15, p:0.0},
+    {kind:"pill", x:30, y:78, s:34, p:1.7},
+    {kind:"ring", x:44, y:20, s:22, p:3.1},
+    {kind:"tri",  x:8,  y:34, s:14, p:4.4},
+    {kind:"dot",  x:38, y:56, s:9,  p:5.6}
+  ];
+
+  var card    = document.getElementById("card");
+  var anchor  = document.getElementById("boxAnchor");
+  var swing   = document.getElementById("boxSwing");
+  var wrap    = document.getElementById("boxWrap");
+  var glow    = document.getElementById("glow");
+  var bow     = document.getElementById("bow");
+  var itemsEl = document.getElementById("items");
+  var dotsEl  = document.getElementById("dots");
+
+  /* ---------- build world layers ---------- */
+  var worldEls = WORLDS.map(function(wd, wi){
+    var w = document.createElement("div");
+    w.className = "world";
+    var thumbs = [ ITEM_CFG[wd.items[0]].src, ITEM_CFG[wd.items[1]].src, "assets/box.png" ];
+    var rowsHtml = TIERS.map(function(t, ri){
+      return '<div class="trow">' +
+        '<div class="thumb" style="background:' + wd.color + '1F"><img src="' + thumbs[ri] + '" alt=""></div>' +
+        '<div><div class="tname">' + t.tier + '</div><div class="tcap">' + wd.name + '</div></div>' +
+        '<div class="tprice">' + t.price + '</div>' +
+        '<div class="plus">+</div></div>';
+    }).join("");
+    var primsHtml = PRIMS.map(function(p){
+      var st = "left:" + p.x + "%;top:" + p.y + "%;width:" + p.s + "px;height:" +
+               (p.kind === "pill" ? Math.round(p.s*0.42) : p.s) + "px";
+      return '<div class="prim ' + p.kind + '" style="' + st + '"></div>';
+    }).join("");
+    w.innerHTML =
+      '<div class="panel" style="background:' + wd.color + '">' + primsHtml +
+        '<div class="eyebrow">Aztheticlyf &middot; Colour Worlds</div>' +
+        '<div class="headline"><span>' + wd.l1 + '</span><span class="l2">' + wd.l2 + '</span></div>' +
+      '</div>' +
+      '<div class="table-wrap">' +
+        '<div class="table-title">' + wd.name + '</div>' +
+        '<div class="table-sub">Gift Hamper &middot; Three Tiers</div>' +
+        '<div class="rows">' + rowsHtml + '</div>' +
+        '<div class="table-note">Customised hampers from \u20B9499 &middot; same-day delivery in Chennai</div>' +
+      '</div>';
+    card.insertBefore(w, anchor);
+    return { el:w, prims:Array.prototype.slice.call(w.querySelectorAll(".prim")) };
+  });
+
+  /* ---------- build dots ---------- */
+  var dotEls = WORLDS.map(function(wd){
+    var d = document.createElement("div");
+    d.className = "dotk";
+    dotsEl.appendChild(d);
+    return d;
+  });
+
+  /* ---------- build item nodes (2 per world) ---------- */
+  var itemNodes = [];
+  WORLDS.forEach(function(wd, wi){
+    wd.items.forEach(function(key, ji){
+      var cfg = ITEM_CFG[key];
+      var d = document.createElement("div");
+      d.className = "item";
+      var img = document.createElement("img");
+      img.src = cfg.src; img.alt = cfg.label;
+      d.appendChild(img);
+      itemsEl.appendChild(d);
+      var l = document.createElement("div");
+      l.className = "label";
+      l.textContent = cfg.label;
+      card.appendChild(l);
+      itemNodes.push({ el:d, label:l, cfg:cfg, world:wi, slot:ji, lw:0, lh:0 });
+    });
+  });
+
+  /* ---------- measure ---------- */
+  var W = 0, H = 0, cardRect = null, wrapRect = null;
+  function measure(){
+    var cw = card.clientWidth, ch = card.clientHeight;
+    var bw = Math.max(215, Math.min(330, ch * 0.47, cw * 0.30));
+    if (cw <= 700) bw = Math.max(180, Math.min(218, cw * 0.56, ch * 0.30));
+    wrap.style.width = bw + "px";
+    cardRect = card.getBoundingClientRect();
+    wrapRect = wrap.getBoundingClientRect();
+    W = wrapRect.width; H = wrapRect.height;
+    itemNodes.forEach(function(n){
+      n.el.style.width = (n.cfg.w * W) + "px";
+      n.lw = n.label.offsetWidth; n.lh = n.label.offsetHeight;
+    });
+  }
+  window.addEventListener("resize", measure);
+
+  /* ---------- easing helpers ---------- */
+  function clamp01(v){ return v<0?0:(v>1?1:v); }
+  function easeOutCubic(u){ return 1-Math.pow(1-u,3); }
+  function easeInOut(u){ return u<.5 ? 2*u*u : 1-Math.pow(-2*u+2,2)/2; }
+  function easeOutBack(u,c){ return 1 + (c+1)*Math.pow(u-1,3) + c*Math.pow(u-1,2); }
+  function wrapD(d){ d = d % NW; if (d > NW/2) d -= NW; if (d < -NW/2) d += NW; return d; }
+
+  var MOUTH_X = 0.50, MOUTH_Y = 0.44;
+
+  /* ---------- item render (V1 engine, shortened journey) ---------- */
+  function renderItem(n, lt){
+    var it = n.cfg, el = n.el, J = JOURNEY[n.slot];
+    var end = J.holdEnd + J.sink;
+    if (lt < J.t0 || lt > end){
+      el.style.opacity = "0"; n.label.style.opacity = "0"; return;
+    }
+    var iw = it.w * W;
+    var ih = iw * (el.firstChild.naturalHeight / Math.max(1, el.firstChild.naturalWidth) || 1);
+    var mx = MOUTH_X * W, my = MOUTH_Y * H;
+    var hx = mx + it.hx * W * 0.62, hy = my + it.hy * H;
+    var x, y, s, rot, op;
+    if (lt < J.t0 + J.rise){                                  /* rising */
+      var u = (lt - J.t0) / J.rise, e = easeOutCubic(u);
+      x = mx + (hx-mx)*e + Math.sin(u*Math.PI) * it.side * -13;
+      y = my + (hy-my)*e;
+      s = 0.22 + 0.78 * easeOutBack(u, 1.35);
+      rot = it.rot * e + Math.sin(u*Math.PI*1.5) * 5 * (1-u);
+      op = clamp01(u/0.13);
+    } else if (lt < J.holdEnd){                               /* hovering */
+      var ht = lt - J.t0 - J.rise;
+      x = hx; y = hy + Math.sin(ht*3.4 + it.hx*10) * 3.6;
+      s = 1; rot = it.rot + Math.sin(ht*2.2 + it.hx*8) * 1.8;
+      op = 1;
+    } else {                                                  /* sinking */
+      var u2 = (lt - J.holdEnd) / J.sink, e2 = easeInOut(u2);
+      x = hx + (mx-hx)*e2 + Math.sin(u2*Math.PI) * it.side * -9;
+      y = hy + (my-hy)*e2;
+      s = 1 - 0.78*e2; rot = it.rot * (1-e2);
+      op = u2 < 0.55 ? 1 : 1 - (u2-0.55)/0.45;
+    }
+    el.style.opacity = op.toFixed(3);
+    el.style.transform = "translate(" + (x - iw/2) + "px," + (y - ih) + "px) rotate(" + rot.toFixed(2) + "deg) scale(" + s.toFixed(3) + ")";
+    /* label, card-relative, clamped inside the card */
+    var lin  = clamp01((lt - (J.t0 + J.rise - 0.45)) / 0.4);
+    var lout = clamp01((lt - (J.holdEnd - 0.25)) / 0.35);
+    var lop = Math.min(lin, 1 - lout);
+    var sf = W > 0 ? wrapRect.width / W : 1;
+    var lx = (wrapRect.left - cardRect.left) + (x + (it.side>0 ? iw*0.36 : -iw*0.36)) * sf - n.lw/2;
+    lx = Math.max(8, Math.min(lx, cardRect.width - n.lw - 8));
+    var ly = (wrapRect.top - cardRect.top) + (y - ih*0.55) * sf - n.lh/2 + (1-lin)*8;
+    ly = Math.max(8, Math.min(ly, cardRect.height - n.lh - 8));
+    n.label.style.opacity = lop.toFixed(3);
+    n.label.style.transform = "translate(" + lx.toFixed(1) + "px," + ly.toFixed(1) + "px)";
+  }
+
+  function hideItem(n){ n.el.style.opacity = "0"; n.label.style.opacity = "0"; }
+
+  /* ---------- reduced motion: world 1 static, items settled ---------- */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function renderStatic(){
+    measure();
+    worldEls.forEach(function(we, i){
+      we.el.style.opacity = i === 0 ? "1" : "0";
+      we.el.style.transform = "none";
+    });
+    dotEls.forEach(function(d, i){
+      d.classList.toggle("on", i === 0);
+      d.style.background = i === 0 ? WORLDS[0].color : "";
+    });
+    itemNodes.forEach(function(n){
+      if (n.world !== 0){ hideItem(n); return; }
+      var it = n.cfg;
+      var iw = it.w * W;
+      var ih = iw * (n.el.firstChild.naturalHeight / Math.max(1, n.el.firstChild.naturalWidth) || 1);
+      var x = MOUTH_X*W + it.hx*W*0.62, y = MOUTH_Y*H + it.hy*H;
+      n.el.style.opacity = "1";
+      n.el.style.transform = "translate(" + (x-iw/2) + "px," + (y-ih) + "px) rotate(" + it.rot + "deg)";
+      var lx = (wrapRect.left - cardRect.left) + x + (it.side>0 ? iw*0.36 : -iw*0.36) - n.lw/2;
+      lx = Math.max(8, Math.min(lx, cardRect.width - n.lw - 8));
+      var ly = (wrapRect.top - cardRect.top) + y - ih*0.55 - n.lh/2;
+      n.label.style.opacity = "1";
+      n.label.style.transform = "translate(" + lx + "px," + ly + "px)";
+    });
+  }
+
+  /* ---------- master frame ---------- */
+  function frame(time){
+    var ltLoop = time % LOOP;
+    var slotPos = ltLoop / SLOT;
+    var g = Math.floor(slotPos);                 /* current world index */
+    var frac = slotPos - g;
+    var u = frac <= HOLD_F ? 0 : (frac - HOLD_F) / TURN_F;   /* turn progress */
+    var p = g + (u > 0 ? easeOutBack(clamp01(u), 1.1) : 0);   /* continuous phase */
+
+    /* worlds: 3D carousel around the phase */
+    for (var i = 0; i < NW; i++){
+      var d = wrapD(p - i);
+      var ad = Math.abs(d);
+      var we = worldEls[i];
+      if (ad >= 0.96){ we.el.style.opacity = "0"; continue; }
+      we.el.style.opacity = ad <= 0.85 ? "1" : ((0.96 - ad) / 0.11).toFixed(3);
+      we.el.style.zIndex = String(10 - Math.round(ad * 6) + (d > 0.02 ? 3 : 0));
+      we.el.style.transform =
+        "translateX(" + (d * 103).toFixed(2) + "%) " +
+        "rotateY(" + (-d * 42).toFixed(2) + "deg) " +
+        "translateZ(" + (-ad * 150).toFixed(1) + "px)";
+      we.el.style.filter = "brightness(" + (1 - ad * 0.13).toFixed(3) + ")";
+      /* primitives drift during the hold */
+      var prims = we.prims;
+      for (var k = 0; k < prims.length; k++){
+        var P = PRIMS[k];
+        var dx = Math.sin(time * 0.62 + P.p * 1.9) * 9;
+        var dy = Math.cos(time * 0.50 + P.p * 2.4) * 11;
+        var rr = Math.sin(time * 0.4 + P.p) * 14;
+        prims[k].style.transform = "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px) rotate(" + rr.toFixed(1) + "deg)";
+      }
+    }
+
+    /* the box: idle life + swing-ahead lead during the turn */
+    var lead = 0;
+    if (u > 0){
+      var uu = clamp01(u);
+      lead = Math.max(0, easeOutBack(uu, 2.6) - easeOutBack(uu, 1.1));
+    }
+    var sway = Math.sin(time * 0.55) * 0.35;
+    var bob  = Math.sin(time * 0.85) * 2.5;
+    wrap.style.transform = "rotate(" + sway.toFixed(3) + "deg) translateY(" + bob.toFixed(2) + "px)";
+    bow.style.transform = "rotate(" + (Math.sin(time * 0.9 + 1.1) * 2.4 - 2).toFixed(3) + "deg)";
+    var breathe = 0.62 + 0.30 * (0.5 + 0.5 * Math.sin(time * 1.25));
+    glow.style.opacity = breathe.toFixed(3);
+    glow.style.transform = "translate(-50%,-50%) scale(" + (1 + 0.05 * Math.sin(time * 1.25)).toFixed(3) + ")";
+    var cardW = cardRect ? cardRect.width : 1000;
+    var swingX = -lead * cardW * 0.30;
+    var blur = Math.min(5, lead * 30);
+    swing.style.transform = "translateX(" + swingX.toFixed(1) + "px) rotate(" + (-lead * 26).toFixed(2) + "deg) scale(" + (1 + lead * 0.22).toFixed(3) + ")";
+    swing.style.filter = blur > 0.25 ? "blur(" + blur.toFixed(2) + "px)" : "none";
+
+    /* dots */
+    var active = ((Math.round(p) % NW) + NW) % NW;
+    dotEls.forEach(function(dEl, i){
+      var on = i === active;
+      if (on !== dEl._on){ dEl._on = on; dEl.classList.toggle("on", on); dEl.style.background = on ? WORLDS[i].color : ""; }
+    });
+
+    /* items: only the current world's pair, keyed to slot-local time */
+    var slotLt = frac * SLOT;
+    for (var j = 0; j < itemNodes.length; j++){
+      var n = itemNodes[j];
+      if (n.world !== g){ if (n.el.style.opacity !== "0") hideItem(n); continue; }
+      renderItem(n, slotLt);
+    }
+  }
+
+  function start(){
+    measure();
+    if (reduced){ renderStatic(); return; }
+    gsap.ticker.add(function(){ frame(gsap.ticker.time); });
+  }
+  if (document.readyState === "complete") start();
+  else window.addEventListener("load", start);
+})();
+</script>
+</body>
+</html>
