@@ -40,7 +40,7 @@
   </script>
 <style data-purpose="dashboard-styling">
     body {
-      background-color: #F8F6F2;
+      background-color: #F1EDF6;
       font-family: 'Poppins', sans-serif;
       color: #1A1A1A;
       -webkit-font-smoothing: antialiased;
@@ -71,7 +71,72 @@
       transform: scale(0.98);
     }
   </style>
-  <script type="module" crossorigin src="./assets/index--NH7C-dJ.js"></script>
+<style data-purpose="dash-panel">
+  :root{
+    --page:#F1EDF6; --ink:#221D26; --muted:#8B8494; --soft:#F7F4FB; --soft2:#EFE9F7;
+    --lav:#E7DEF3; --dark:#141414; --green:#25D366;
+    --r-lg:32px; --r-md:24px; --r-sm:16px;
+  }
+  .page-wrap{max-width:1340px;margin:0 auto;padding:28px 20px 40px;display:flex;flex-direction:column;gap:26px}
+  .stitch-wrap main{max-width:100% !important}
+
+  .panel{background:#fff;border-radius:var(--r-lg);padding:26px;display:grid;gap:20px;
+    grid-template-columns:76px 1fr 302px;
+    grid-template-areas:"rail hero side" "rail tiers tiers";
+    box-shadow:0 24px 60px rgba(60,40,110,.08)}
+  .rail{grid-area:rail;background:var(--soft);border-radius:var(--r-md);display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:10px}
+  .rail .mark{width:44px;height:44px;border-radius:14px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:19px;margin-bottom:8px}
+  .rail button{width:44px;height:44px;border:0;border-radius:14px;background:transparent;color:#6E6880;display:grid;place-items:center;cursor:pointer;transition:.25s}
+  .rail button svg{width:21px;height:21px}
+  .rail button:hover{background:#fff;color:var(--ink);box-shadow:0 4px 14px rgba(60,40,110,.10)}
+  .rail button.on{background:#fff;color:var(--ink);box-shadow:0 4px 14px rgba(60,40,110,.12)}
+  .rail .sp{flex:1}
+  .rail .wa{background:var(--green);color:#fff}
+  .rail .wa:hover{background:#1fb857;color:#fff}
+
+  .panel .hero{grid-area:hero;position:relative;border-radius:var(--r-md);overflow:hidden;min-height:520px;background:var(--soft)}
+
+  .side{grid-area:side;background:var(--soft);border-radius:var(--r-md);padding:22px 20px;display:flex;flex-direction:column}
+  .side h3{font-size:17px;font-weight:600;margin-bottom:6px}
+  .side p{font-size:12px;color:var(--muted);margin-bottom:14px}
+  .side .row{display:flex;align-items:center;gap:12px;padding:11px 10px;border-radius:14px;transition:.2s;cursor:pointer}
+  .side .row:hover{background:#fff}
+  .side .row .ic{width:36px;height:36px;border-radius:11px;background:#fff;display:grid;place-items:center;color:#6E6880;flex:none}
+  .side .row:hover .ic{background:var(--soft2)}
+  .side .row .ic svg{width:18px;height:18px}
+  .side .row b{font-size:13.5px;font-weight:600;display:block;line-height:1.25}
+  .side .row span{font-size:11px;color:var(--muted)}
+  .side .row .arr{margin-left:auto;color:#B9B2C4;font-size:15px}
+  .side .build{margin-top:auto;background:var(--dark);color:#fff;text-align:center;padding:14px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.4px}
+  .side .build:hover{background:#000}
+
+  .tiers{grid-area:tiers;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .tier{background:var(--soft);border-radius:var(--r-md);padding:14px;display:flex;gap:14px;align-items:center;transition:.25s}
+  .tier:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(60,40,110,.10)}
+  .tier .tp{width:104px;height:88px;border-radius:var(--r-sm);overflow:hidden;flex:none;position:relative}
+  .tier .tp img{display:block;width:100%;height:100%;object-fit:cover}
+  .tier .bdg{position:absolute;top:6px;left:6px;background:var(--lav);font-size:8px;font-weight:700;padding:4px 7px;border-radius:999px;letter-spacing:.4px}
+  .tier b{font-size:14.5px;font-weight:600;display:block}
+  .tier .pr{font-size:16px;font-weight:700;margin:1px 0 6px}
+  .chip{display:inline-flex;background:#fff;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:600;align-items:center;gap:6px}
+  .chip i{width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+  @media (max-width:1080px){
+    .panel{grid-template-columns:64px 1fr;grid-template-areas:"rail hero" "rail side" "rail tiers"}
+    .tiers{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:680px){
+    .page-wrap{padding:14px 10px 26px}
+    .panel{grid-template-columns:minmax(0,1fr);grid-template-areas:"rail" "hero" "side" "tiers";padding:16px}
+    .rail{flex-direction:row;padding:10px 12px;overflow-x:auto;scrollbar-width:none}
+    .rail::-webkit-scrollbar{display:none}
+    .rail button,.rail .mark{flex:none}
+    .rail .mark{margin:0} .rail .sp{display:none}
+    .panel .hero{min-height:420px}
+    .tiers{grid-template-columns:1fr}
+  }
+</style>
+  <script type="module" crossorigin src="./assets/index-CYHc7f5M.js"></script>
 </head>
 <body>
 <div id="root"></div>
