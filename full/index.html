@@ -80,7 +80,7 @@
   .page-wrap{max-width:1340px;margin:0 auto;padding:28px 20px 40px;display:flex;flex-direction:column;gap:26px}
   .stitch-wrap main{max-width:100% !important}
 
-  .panel{background:#fff;border-radius:var(--r-lg);padding:26px;display:grid;gap:20px;
+  .panel{background:#fff;border-radius:var(--r-lg);padding:26px;display:grid;gap:16px 20px;
     grid-template-columns:76px 1fr 302px;
     grid-template-areas:"rail hero side" "rail tiers tiers";
     box-shadow:0 24px 60px rgba(60,40,110,.08)}
@@ -94,20 +94,20 @@
   .rail .wa{background:var(--green);color:#fff}
   .rail .wa:hover{background:#1fb857;color:#fff}
 
-  .panel .hero{grid-area:hero;position:relative;border-radius:var(--r-md);overflow:hidden;min-height:520px;background:var(--soft)}
+  .panel .hero{grid-area:hero;position:relative;border-radius:var(--r-md);overflow:hidden;min-height:0;background:var(--soft)}
 
-  .side{grid-area:side;background:var(--soft);border-radius:var(--r-md);padding:22px 20px;display:flex;flex-direction:column}
-  .side h3{font-size:17px;font-weight:600;margin-bottom:6px}
-  .side p{font-size:12px;color:var(--muted);margin-bottom:14px}
-  .side .row{display:flex;align-items:center;gap:12px;padding:11px 10px;border-radius:14px;transition:.2s;cursor:pointer}
+  .side{grid-area:side;background:var(--soft);border-radius:var(--r-md);padding:18px;display:flex;flex-direction:column}
+  .side h3{font-size:17px;font-weight:600;margin-bottom:4px}
+  .side p{font-size:12px;color:var(--muted);margin-bottom:10px}
+  .side .row{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:14px;transition:.2s;cursor:pointer}
   .side .row:hover{background:#fff}
-  .side .row .ic{width:36px;height:36px;border-radius:11px;background:#fff;display:grid;place-items:center;color:#6E6880;flex:none}
+  .side .row .ic{width:32px;height:32px;border-radius:11px;background:#fff;display:grid;place-items:center;color:#6E6880;flex:none}
   .side .row:hover .ic{background:var(--soft2)}
   .side .row .ic svg{width:18px;height:18px}
   .side .row b{font-size:13.5px;font-weight:600;display:block;line-height:1.25}
   .side .row span{font-size:11px;color:var(--muted)}
   .side .row .arr{margin-left:auto;color:#B9B2C4;font-size:15px}
-  .side .build{margin-top:auto;background:var(--dark);color:#fff;text-align:center;padding:14px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.4px}
+  .side .build{margin-top:auto;background:var(--dark);color:#fff;text-align:center;padding:12px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.4px}
   .side .build:hover{background:#000}
 
   .tiers{grid-area:tiers;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -121,8 +121,18 @@
   .chip{display:inline-flex;background:#fff;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:600;align-items:center;gap:6px}
   .chip i{width:6px;height:6px;border-radius:50%;background:var(--green)}
 
-  @media (max-width:1080px){
+  @media (max-width:1280px){
+    .side{padding:16px}
+    .side p{display:none}
+    .side h3{font-size:16px;margin-bottom:8px}
+    .side .row{padding:6px 10px}
+    .side .row .ic{width:28px;height:28px}
+    .side .build{padding:10px}
+  }
+  @media (max-width:1150px){
     .panel{grid-template-columns:64px 1fr;grid-template-areas:"rail hero" "rail side" "rail tiers"}
+    .panel .hero{min-height:380px}
+    .side p{display:block}
     .tiers{grid-template-columns:1fr 1fr}
   }
   @media (max-width:680px){
@@ -132,7 +142,7 @@
     .rail::-webkit-scrollbar{display:none}
     .rail button,.rail .mark{flex:none}
     .rail .mark{margin:0} .rail .sp{display:none}
-    .panel .hero{min-height:420px}
+    .panel .hero{min-height:250px}
     .tiers{grid-template-columns:1fr}
   }
 </style>
