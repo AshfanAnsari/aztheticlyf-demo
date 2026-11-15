@@ -146,6 +146,88 @@
     .tiers{grid-template-columns:1fr}
   }
 </style>
+<style data-purpose="apple-skin">
+  /* ===== APPLE UI SKIN (user order 2026-11-15) =====
+     Material + micro-interactions ONLY. No layout property is touched:
+     nothing moves, resizes, reflows or changes place. */
+
+  /* Ambient wash behind everything, so the glass has something to refract */
+  body{
+    background:
+      radial-gradient(900px 520px at 12% -6%, rgba(158,123,255,.16), rgba(158,123,255,0) 60%),
+      radial-gradient(820px 520px at 96% 12%, rgba(255,92,147,.10), rgba(255,92,147,0) 60%),
+      radial-gradient(1000px 640px at 50% 108%, rgba(37,211,102,.07), rgba(37,211,102,0) 60%),
+      #F1EDF6;
+    background-attachment: fixed;
+  }
+
+  /* Frosted glass — the main dashboard panel */
+  .panel{
+    background: rgba(255,255,255,.68);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,.65);
+    box-shadow: 0 24px 60px rgba(60,40,110,.10), inset 0 1px 0 rgba(255,255,255,.85);
+  }
+  /* Nested vibrancy — rail, category panel, tier cards */
+  .rail, .side, .tier{
+    background: rgba(255,255,255,.48);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    backdrop-filter: blur(12px) saturate(160%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 0 0 1px rgba(255,255,255,.35);
+  }
+  .rail button:hover{ background: rgba(255,255,255,.85); }
+  .side .row:hover{ background: rgba(255,255,255,.85); }
+  .side .row .ic{ background: rgba(255,255,255,.75); }
+  .chip{
+    background: rgba(255,255,255,.82);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 4px rgba(60,40,110,.06);
+  }
+
+  /* Hero slot — a hairline light ring only; the scenes inside are untouched */
+  .panel .hero{
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.55);
+  }
+  .panel .hero::after{
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.45), inset 0 1px 0 rgba(255,255,255,.5);
+    pointer-events: none; z-index: 6;
+  }
+
+  /* Stitch sections — glass cards */
+  .panel-base{
+    background-color: rgba(255,255,255,.66) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    backdrop-filter: blur(18px) saturate(170%);
+    border: 1px solid rgba(255,255,255,.6);
+    box-shadow: 0 18px 44px rgba(60,40,110,.08), inset 0 1px 0 rgba(255,255,255,.85) !important;
+  }
+  .stitch-wrap .bg-white{
+    background-color: rgba(255,255,255,.62) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+  }
+
+  /* Apple micro-interactions — springy press, gentle response (transform only) */
+  .rail button, .side .row, .tier, .chip, .side .build, .pill-btn, .tile-hover{
+    transition: transform .35s cubic-bezier(.34,1.35,.64,1), box-shadow .35s ease, background-color .25s ease;
+  }
+  .rail button:active, .side .build:active, .pill-btn:active{ transform: scale(.94); }
+  .tier:active{ transform: translateY(-3px) scale(.99); }
+  .stitch-wrap a, .stitch-wrap button{
+    transition: transform .35s cubic-bezier(.34,1.35,.64,1), box-shadow .35s ease, background-color .25s ease, opacity .25s ease;
+  }
+  .stitch-wrap a:active, .stitch-wrap button:active{ transform: scale(.98); }
+
+  ::selection{ background: rgba(123,47,224,.18); }
+
+  @media (prefers-reduced-motion: reduce){
+    .rail button, .side .row, .tier, .chip, .side .build, .pill-btn, .tile-hover,
+    .stitch-wrap a, .stitch-wrap button{ transition: none; }
+    .rail button:active, .side .build:active, .pill-btn:active, .tier:active,
+    .stitch-wrap a:active, .stitch-wrap button:active{ transform: none; }
+  }
+</style>
   <script type="module" crossorigin src="./assets/index-vZFYpSSY.js"></script>
 </head>
 <body>
